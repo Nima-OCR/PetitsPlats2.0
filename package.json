@@ -4,7 +4,9 @@
   "description": "Développez un algorithme de recherche en JavaScript",
   "main": "index.js",
   "scripts": {
-    "sass": "sass --watch sass/main.scss css/style.css"
+    "sass": "sass --watch sass/main.scss css/style.css",
+    "lint": "eslint --max-warnings=0 ."
+
   },
   "repository": {
     "type": "git",
