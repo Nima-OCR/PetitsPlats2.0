@@ -6,7 +6,9 @@
   "scripts": {
     "sass": "sass --watch sass/main.scss css/style.css",
     "lint": "eslint --max-warnings=0 ."
-
+  },
+  "gitHooks": {
+    "pre-push": "npm run lint"
   },
   "repository": {
     "type": "git",
