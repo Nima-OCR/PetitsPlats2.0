@@ -1,0 +1,35 @@
+
+
+  .form-section {
+
+    &__form {
+      display: flex;
+      align-items: center;
+      background-color: $color-grey;
+      border-radius: 5px;
+    }
+
+    &__input {
+      width: 100%;
+      padding: 24px;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 22px;
+      color: $color-black;
+      border: none;
+      border-radius: 5px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      background-color: $color-grey;
+
+      &:focus {
+        outline: none;
+      }
+
+      &-icon {
+        font-family: "Font Awesome", sans-serif;
+        padding: 12px;
+        font-size: 32px;
+      }
+    }
+  }

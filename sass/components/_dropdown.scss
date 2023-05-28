@@ -1,0 +1,58 @@
+
+
+    #dropdown {
+      display: flex;
+      justify-content: flex-start;
+      margin-top: 20px;
+      margin-bottom: 25px;
+
+      .dropdown__block {
+        margin: 10px;
+        padding: 5px;
+
+        &--ingredient {
+          background-color: lightgreen;
+        }
+
+        &--device {
+          background-color: lightblue;
+        }
+
+        &--utensil {
+          background-color: lightyellow;
+        }
+      }
+
+      .dropdown__input {
+        color: $color-white;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 22px;
+        width: 100%;
+        padding: 27px;
+        border: none;
+        background-color: unset;
+
+        &::placeholder {
+          font-weight: 700;
+          font-size: 18px;
+          line-height: 22px;
+          color: $color-white;
+          opacity: 1;
+        }
+
+        &--Ingredients {
+          background-color: $color-primary;
+        }
+
+        &--Appareils {
+          background-color: $color-secondary;
+
+        }
+
+        &--Ustensiles {
+          background-color: $color-tertiary;
+
+        }
+      }
+    }

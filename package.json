@@ -1,0 +1,24 @@
+{
+  "name": "petitsplats2.0",
+  "version": "1.0.0",
+  "description": "Développez un algorithme de recherche en JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch sass/main.scss css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nima-OCR/PetitsPlats2.0.git"
+  },
+  "keywords": [
+    "site",
+    "de",
+    "recettes"
+  ],
+  "author": "Nima",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nima-OCR/PetitsPlats2.0/issues"
+  },
+  "homepage": "https://github.com/Nima-OCR/PetitsPlats2.0#readme"
+}
