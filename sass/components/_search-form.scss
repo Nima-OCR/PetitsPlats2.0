@@ -1,6 +1,12 @@
 
 
   .form-section {
+    width: 62%;
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translateX(-50%);
+
 
     &__form {
       display: flex;
@@ -27,9 +33,15 @@
       }
 
       &-icon {
+        cursor: pointer;
+        background-color: $color-black;
         font-family: "Font Awesome", sans-serif;
+        color: $color-white;
         padding: 12px;
         font-size: 32px;
+        border-radius: 5px;
+        margin-right: 8px;
+
       }
     }
   }

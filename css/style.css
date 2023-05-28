@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 *,
 *::after,
 *::before {
@@ -8,11 +9,28 @@
 }
 
 body {
+  margin: 0;
+  padding: 0 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Anton", sans-serif;
   box-sizing: border-box;
-  padding: 3rem;
-  font-family: "Lato", sans-serif;
 }
 
+main {
+  background-color: #C6C6C6;
+  max-width: 1440px;
+  width: 100%;
+}
+
+.form-section {
+  width: 62%;
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .form-section__form {
   display: flex;
   align-items: center;
@@ -36,15 +54,19 @@ body {
   outline: none;
 }
 .form-section__input-icon {
+  cursor: pointer;
+  background-color: #000000;
   font-family: "Font Awesome", sans-serif;
+  color: #FFFFFF;
   padding: 12px;
   font-size: 32px;
+  border-radius: 5px;
+  margin-right: 8px;
 }
 
 #dropdown {
   display: flex;
   justify-content: flex-start;
-  margin-top: 20px;
   margin-bottom: 25px;
 }
 #dropdown .dropdown__block {
@@ -78,7 +100,7 @@ body {
   opacity: 1;
 }
 #dropdown .dropdown__input--Ingredients {
-  background-color: #3282F7;
+  background-color: #FFD15B;
 }
 #dropdown .dropdown__input--Appareils {
   background-color: #68D9A4;
@@ -92,6 +114,7 @@ body {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 50px;
+  padding: 0 102px;
 }
 #recipes .recipe-article {
   background-color: #E7E7E7;
@@ -154,10 +177,34 @@ body {
   line-height: 14px;
 }
 
-.header__logo {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 17px;
+header .header {
+  position: relative;
+  width: 100%;
+  height: 667px;
+}
+header .header__img {
+  width: 100%;
+  object-fit: cover;
+}
+header .header__logo {
+  position: absolute;
+  top: 51px;
+  left: 69px;
+  cursor: pointer;
+}
+header .header__heading {
+  position: absolute;
+  bottom: 290px;
+  padding: 0 337px;
+  width: 100%;
+  height: 132px;
+}
+header .header__title {
+  text-align: center;
+  font-weight: 400;
+  font-size: 44px;
+  line-height: 66px;
+  color: #FFD15B;
 }
 
 /*# sourceMappingURL=style.css.map */

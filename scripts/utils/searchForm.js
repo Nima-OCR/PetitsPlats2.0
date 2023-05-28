@@ -16,9 +16,9 @@ export function displayFormSection() {
   const input = document.createElement("input");
   input.classList.add("form-section__input");
   input.setAttribute("type", "text");
-  input.setAttribute("placeholder", "Rechercher une recette");
+  input.setAttribute("placeholder", "Rechercher une recette, un ingrédient, ...");
   input.setAttribute("tabindex", "0");
-  input.setAttribute("aria-label", "Rechercher une recette");
+  input.setAttribute("aria-label", "Rechercher une recette, un ingrédient, ...");
 
   // Création de l'icône de recherche
   const icon = document.createElement("i");

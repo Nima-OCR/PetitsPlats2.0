@@ -1,4 +1,4 @@
-import {recipes} from "../../data/recipes.js";
+import {recipesOld} from "../../data/recipesOld.js";
 
 export function createRecipeCard() {
 
@@ -7,7 +7,7 @@ export function createRecipeCard() {
   section.id = 'recipes';
 
 
-  for (const recipe of recipes) {
+  for (const recipe of recipesOld) {
     const { id, name, servings, ingredients, time, description} = recipe;
 
     const article = document.createElement('article');
