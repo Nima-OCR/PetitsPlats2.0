@@ -3,11 +3,14 @@
     #dropdown {
       display: flex;
       justify-content: flex-start;
-      margin-bottom: 25px;
+      gap: 66px;
+      margin: 25px 0 55px 0;
+      padding: 0 102px;
+
 
       .dropdown__block {
-        margin: 10px;
-        padding: 5px;
+        //margin: 10px;
+        //padding: 5px;
 
         &--ingredient {
           background-color: lightgreen;
@@ -23,12 +26,13 @@
       }
 
       .dropdown__input {
-        color: $color-white;
-        font-weight: 400;
-        font-size: 18px;
+        color: $color-dropdown;
+        font-family: 'Manrope', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
         line-height: 22px;
         width: 100%;
-        padding: 27px;
+        padding: 17px;
         border: none;
         background-color: unset;
 
@@ -36,21 +40,23 @@
           font-weight: 700;
           font-size: 18px;
           line-height: 22px;
-          color: $color-white;
+          color: $color-black;
           opacity: 1;
         }
 
         &--Ingredients {
-          background-color: $color-primary;
+          border-radius: 11px;
+          background-color: $color-white;
         }
 
         &--Appareils {
-          background-color: $color-secondary;
-
+          border-radius: 11px;
+          background-color: $color-white;
         }
 
         &--Ustensiles {
-          background-color: $color-tertiary;
+          border-radius: 11px;
+          background-color: $color-white;
 
         }
       }
