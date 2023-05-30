@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Manrope&display=swap");
 *,
@@ -72,6 +73,11 @@ main {
   margin: 25px 0 55px 0;
   padding: 0 102px;
 }
+#dropdown .dropdown__block {
+  background-color: #FFFFFF;
+  border-radius: 11px;
+  position: relative;
+}
 #dropdown .dropdown__block--ingredient {
   background-color: lightgreen;
 }
@@ -81,25 +87,78 @@ main {
 #dropdown .dropdown__block--utensil {
   background-color: lightyellow;
 }
-#dropdown .dropdown__input {
-  color: #1B1B1B;
+#dropdown .dropdown__block.active {
+  border-radius: 11px 11px 0 0;
+}
+#dropdown .dropdown__block .dropdown__input-wrapper {
+  position: relative;
+}
+#dropdown .dropdown__block .dropdown__input-wrapper .fa-search {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  color: #FFD15B;
+}
+#dropdown .dropdown__block .dropdown__input {
+  position: relative;
+  color: #FFD15B;
   font-family: "Manrope", sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 22px;
   width: 100%;
-  padding: 17px;
+  padding: 17px 40px 17px 17px; /* Ajout d'un padding pour l'icône de recherche */
   border: none;
   background-color: unset;
+  cursor: pointer;
 }
-#dropdown .dropdown__input::placeholder {
+#dropdown .dropdown__block .dropdown__input::placeholder {
   font-weight: 700;
   font-size: 18px;
   line-height: 22px;
   color: #000000;
   opacity: 1;
 }
+#dropdown .dropdown__block .dropdown__ingredient-input {
+  display: none;
+  outline: none;
+  border: solid 1px #C6C6C6;
+  padding: 10px;
+  margin: 10px 17px;
+}
+#dropdown .dropdown__block i {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+  color: #000000;
+  font-size: 16px;
+}
+#dropdown .dropdown__block .fa-chevron-down {
+  font-size: 16px;
+}
+#dropdown .dropdown__block .up {
+  transform: translateY(-50%) rotate(180deg);
+}
+#dropdown .dropdown__block .dropdown__list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #FFFFFF;
+  display: none;
+  border-radius: 0 0 11px 11px;
+}
+#dropdown .dropdown__block .dropdown__list.show {
+  display: block;
+}
+#dropdown .dropdown__block .dropdown__list li {
+  padding: 5px;
+}
 #dropdown .dropdown__input--Ingredients {
+  outline: none;
   border-radius: 11px;
   background-color: #FFFFFF;
 }
