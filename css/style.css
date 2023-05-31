@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Manrope&display=swap");
 *,
@@ -73,10 +72,21 @@ main {
   margin: 25px 0 55px 0;
   padding: 0 102px;
 }
+#dropdown .dropdown__ingredient-search__icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+#dropdown .dropdown__ingredient-search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 #dropdown .dropdown__block {
+  width: 20%;
   background-color: #FFFFFF;
   border-radius: 11px;
   position: relative;
+  padding: 15px;
 }
 #dropdown .dropdown__block--ingredient {
   background-color: lightgreen;
@@ -93,13 +103,6 @@ main {
 #dropdown .dropdown__block .dropdown__input-wrapper {
   position: relative;
 }
-#dropdown .dropdown__block .dropdown__input-wrapper .fa-search {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  color: #FFD15B;
-}
 #dropdown .dropdown__block .dropdown__input {
   position: relative;
   color: #FFD15B;
@@ -108,7 +111,7 @@ main {
   font-size: 16px;
   line-height: 22px;
   width: 100%;
-  padding: 17px 40px 17px 17px; /* Ajout d'un padding pour l'icône de recherche */
+  padding: 5px;
   border: none;
   background-color: unset;
   cursor: pointer;
@@ -123,11 +126,10 @@ main {
 #dropdown .dropdown__block .dropdown__ingredient-input {
   display: none;
   outline: none;
-  border: solid 1px #C6C6C6;
-  padding: 10px;
-  margin: 10px 17px;
+  border: none;
+  padding: 10px 5px 10px 5px;
 }
-#dropdown .dropdown__block i {
+#dropdown .dropdown__block .fa-chevron-down {
   position: absolute;
   top: 50%;
   right: 15px;
@@ -182,7 +184,7 @@ main {
   background-color: #FFFFFF;
   border-radius: 26px;
   width: 30%;
-  height: 364px;
+  height: 730px;
   gap: 50px;
 }
 #recipes .recipe-card {
@@ -190,36 +192,46 @@ main {
   margin: 15px;
 }
 #recipes .recipe-card__content {
-  display: flex;
-  flex-wrap: nowrap;
   width: 100%;
-  padding: 20px;
+  padding: 25px;
 }
 #recipes .recipe-card__image {
   width: 100%;
-  height: 178px;
+  height: 253px;
   border-radius: 25px 25px 0 0;
   object-fit: cover;
+  margin-bottom: 32px;
 }
 #recipes .recipe-card__title {
+  font-family: "Anton", sans-serif;
+  font-style: normal;
   font-weight: 400;
   font-size: 18px;
-  line-height: 22px;
+  line-height: 27px;
 }
 #recipes .recipe-card__description {
-  height: 109px;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 100%;
-  width: 50%;
+  font-size: 14px;
+  line-height: 19px;
+  height: 109px;
   overflow: auto;
   white-space: pre-wrap;
   text-overflow: clip;
 }
 #recipes .recipe-card__duration {
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 22px;
+  position: relative;
+  bottom: 280px;
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 14px;
+  padding: 5px 15px;
+  background-color: #FFD15B;
 }
 #recipes .recipe-card__title-duration {
   display: flex;
@@ -227,16 +239,25 @@ main {
   padding: 5px 20px 5px 20px;
 }
 #recipes .recipe-card__ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 32px;
+  font-family: "Manrope", sans-serif;
+  color: #7A7A7A;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
   height: 109px;
   width: 50%;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
 }
 #recipes .recipe-card__ingredients .recipe-card__ingredient-name {
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 14px;
+  font-family: "Manrope", sans-serif;
+  color: #000000;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
 }
 
 header .header {

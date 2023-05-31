@@ -7,10 +7,34 @@
   margin: 25px 0 55px 0;
   padding: 0 102px;
 
+
+  .dropdown__ingredient-search__icon {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+
+
+  &__ingredient-div {
+  }
+
+  .dropdown__ingredient-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    //padding: 0 14px 0 12px;
+    //width: 100%;
+    //background-color: #ED6454;
+  }
+
+
+
   .dropdown__block {
+    width: 20%;
     background-color: $color-white;
     border-radius: 11px;
     position: relative;
+    padding: 15px;
 
     &--ingredient {
       background-color: lightgreen;
@@ -31,13 +55,7 @@
     .dropdown__input-wrapper {
       position: relative;
 
-      .fa-search {
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        transform: translateY(-50%);
-        color: $color-primary;
-      }
+
     }
 
     .dropdown__input {
@@ -48,7 +66,8 @@
       font-size: 16px;
       line-height: 22px;
       width: 100%;
-      padding: 17px 40px 17px 17px; /* Ajout d'un padding pour l'icône de recherche */
+      //padding: 17px 40px 17px 17px;
+      padding: 5px;
       border: none;
       background-color: unset;
       cursor: pointer;
@@ -65,13 +84,12 @@
     .dropdown__ingredient-input {
       display: none;
       outline: none;
-      border: solid 1px $color-light-grey;
-      padding: 10px;
-      margin: 10px 17px;
+      border: none;
+      padding: 10px 5px 10px 5px;
 
     }
 
-    i {
+    .fa-chevron-down {
       position: absolute;
       top: 50%;
       right: 15px;
@@ -124,3 +142,136 @@
     background-color: $color-white;
   }
 }
+
+
+//#dropdown {
+//  display: flex;
+//  justify-content: flex-start;
+//  gap: 66px;
+//  margin: 25px 0 55px 0;
+//  padding: 0 102px;
+//
+//  &__block {
+//    background-color: $color-white;
+//    border-radius: 11px;
+//    position: relative;
+//
+//    &--Ingredients {
+//      background-color: lightgreen;
+//    }
+//
+//    &--device {
+//      background-color: lightblue;
+//    }
+//
+//    &--utensil {
+//      background-color: lightyellow;
+//    }
+//
+//    &.active {
+//      border-radius: 11px 11px 0 0;
+//    }
+//
+//    &__input-wrapper {
+//      position: relative;
+//
+//      &__input {
+//        color: $color-primary;
+//        font-family: 'Manrope', sans-serif;
+//        font-weight: 500;
+//        font-size: 16px;
+//        line-height: 22px;
+//        width: 100%;
+//        padding: 17px 40px 17px 17px;
+//        border: none;
+//        background-color: unset;
+//        cursor: pointer;
+//
+//        &--Ingredients {
+//          outline: none;
+//          border-radius: 11px;
+//          background-color: $color-white;
+//        }
+//
+//        &--Appareils {
+//          border-radius: 11px;
+//          background-color: $color-white;
+//        }
+//
+//        &--Ustensiles {
+//          border-radius: 11px;
+//          background-color: $color-white;
+//        }
+//
+//        &::placeholder {
+//          font-weight: 700;
+//          font-size: 18px;
+//          line-height: 22px;
+//          color: $color-black;
+//          opacity: 1;
+//        }
+//      }
+//
+//      .fa-chevron-down {
+//        position: absolute;
+//        top: 50%;
+//        right: 15px;
+//        transform: translateY(-50%);
+//        transition: transform 0.3s ease;
+//        color: $color-black;
+//        font-size: 16px;
+//      }
+//
+//      .fa-search {
+//        position: absolute;
+//        top: 50%;
+//        right: 10px;
+//        transform: translateY(-50%);
+//        color: $color-primary;
+//        display: none;
+//      }
+//    }
+//
+//    &__ingredient-div {
+//      display: none;
+//      align-items: center;
+//    }
+//
+//    &__ingredient-search {
+//      display: flex;
+//
+//      &__input {
+//        display: none;
+//        outline: none;
+//        border: solid 1px $color-light-grey;
+//        padding: 10px;
+//        margin: 10px 17px;
+//      }
+//    }
+//
+//    &__list {
+//      position: absolute;
+//      top: 100%;
+//      left: 0;
+//      width: 100%;
+//      background-color: $color-white;
+//      display: none;
+
+
+//
+//      &--Ingredients {
+//        &.show {
+//          display: block;
+//        }
+//      }
+//
+//      li {
+//        padding: 5px;
+//      }
+//    }
+//
+//    .fa-chevron-down.up {
+//      transform: translateY(-50%) rotate(180deg);
+//    }
+//  }
+//}

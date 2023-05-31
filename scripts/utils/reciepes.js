@@ -62,9 +62,8 @@ export function createRecipeCard() {
     servingsElem.className = 'recipe-card__servings';
     servingsElem.textContent = `Portions : ${servings}`;
 
-
-    content.appendChild(ingredientsElem);
     content.appendChild(recipeDescription);
+    content.appendChild(ingredientsElem);
 
 
     article.appendChild(content);
