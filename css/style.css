@@ -221,8 +221,10 @@ main {
   text-overflow: clip;
 }
 #recipes .recipe-card__duration {
+  width: 21%;
   position: relative;
-  bottom: 280px;
+  bottom: 310px;
+  left: 265px;
   font-family: "Manrope", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -234,8 +236,6 @@ main {
   background-color: #FFD15B;
 }
 #recipes .recipe-card__title-duration {
-  display: flex;
-  justify-content: space-between;
   padding: 5px 20px 5px 20px;
 }
 #recipes .recipe-card__ingredients {
