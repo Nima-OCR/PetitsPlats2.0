@@ -28,15 +28,35 @@ export function createRecipeCard() {
 
     const ingredientsElem = document.createElement('ul');
     ingredientsElem.className = 'recipe-card__ingredients';
+
+    const titleDivElem = document.createElement('div');
+    titleDivElem.className = 'recipe-card__ingredients-title';
+    content.appendChild(titleDivElem);
+
+    const titleElem = document.createElement('h2');
+    titleElem.textContent = 'Recettes';
+    titleDivElem.appendChild(titleElem);
+
+    const titleQtyElem = document.createElement('h2');
+    titleQtyElem.textContent = 'Ingrédients';
+    titleQtyElem.className = 'recipe-card__ingredients-title-qty';
+
+
     for (const ingredient of ingredients) {
       const ingredientElem = document.createElement('li');
-      const ingredientSpanElem = document.createElement('span');
-      ingredientSpanElem.className = 'recipe-card__ingredient-name';
-      ingredientSpanElem.textContent = `${ingredient.ingredient} : `;
-      ingredientElem.appendChild(ingredientSpanElem);
-      ingredientElem.appendChild(document.createTextNode(`${ingredient.quantity || ''} ${ingredient.unit || ''}`));
+      const ingredientNameElem = document.createElement('span');
+      ingredientNameElem.className = 'recipe-card__ingredient-name';
+      ingredientNameElem.textContent = `${ingredient.ingredient} : `;
+      ingredientElem.appendChild(ingredientNameElem);
+
+      const ingredientQuantityElem = document.createElement('span');
+      ingredientQuantityElem.className = 'recipe-card__ingredient-quantity';
+      ingredientQuantityElem.textContent = `${ingredient.quantity || ''} ${ingredient.unit || ''}`;
+      ingredientElem.appendChild(ingredientQuantityElem);
+
       ingredientsElem.appendChild(ingredientElem);
     }
+
 
 
     const recipeDescription = document.createElement('p');
@@ -62,7 +82,9 @@ export function createRecipeCard() {
     servingsElem.className = 'recipe-card__servings';
     servingsElem.textContent = `Portions : ${servings}`;
 
-    content.appendChild(recipeDescription);
+    titleDivElem.appendChild(recipeDescription);
+    content.appendChild(titleQtyElem);
+
     content.appendChild(ingredientsElem);
 
 
