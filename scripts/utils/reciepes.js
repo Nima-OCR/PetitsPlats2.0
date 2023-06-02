@@ -8,7 +8,7 @@ export function createRecipeCard() {
 
 
   for (const recipe of recipesOld) {
-    const { id, name, servings, ingredients, time, description} = recipe;
+    const { id, name, ingredients, time, description} = recipe;
 
     // Article
     const article = document.createElement('article');
@@ -75,7 +75,7 @@ export function createRecipeCard() {
 
       const ingredientQuantityElem = document.createElement('span');
       ingredientQuantityElem.className = 'recipe-card__ingredient-quantity';
-      ingredientQuantityElem.textContent = `${ingredient.quantity || ''} ${ingredient.unit || ''}`;
+      ingredientQuantityElem.textContent = (ingredient.quantity || ingredient.unit ? `${ingredient.quantity || ''} ${ingredient.unit || ''}` : "-");
 
       ingredientElem.appendChild(ingredientQuantityElem);
       ingredientsElem.appendChild(ingredientElem);

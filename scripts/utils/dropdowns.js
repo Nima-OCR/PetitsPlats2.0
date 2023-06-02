@@ -69,23 +69,16 @@ export function createDropdownSection() {
 
         isIngredientInputVisible = !isIngredientInputVisible;
       });
-
-    } else {
-      input.addEventListener('click', () => {
-        dropdownList.classList.toggle('show');
-      });
     }
 
     return block;
   }
 
   const ingredientBlock = createDropdownBlock('Ingredients');
-  const deviceBlock = createDropdownBlock('Appareils');
-  const utensilBlock = createDropdownBlock('Ustensiles');
+
 
   dropdownSection.appendChild(ingredientBlock);
-  dropdownSection.appendChild(deviceBlock);
-  dropdownSection.appendChild(utensilBlock);
+
 
 
   const mainElement = document.querySelector('main');

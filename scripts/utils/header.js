@@ -21,7 +21,7 @@ export function createHeaderLogo() {
   headingElement.className = 'header__heading';
 
   const title = document.createElement('h1');
-  title.textContent = 'CHERCHEZ PARMI PLUS DE 1500 RECETTES \n' +
+  title.textContent = 'CHERCHEZ PARMI PLUS DE 1500 RECETTES\n' +
     'DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES';
   title.className = 'header__title';
 
