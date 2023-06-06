@@ -1,3 +1,153 @@
+//#dropdown {
+//  display: flex;
+//  justify-content: flex-start;
+//  gap: 66px;
+//  margin: 25px 0 55px 0;
+//  padding: 0 102px;
+//
+//  .dropdown__block {
+//    width: 20%;
+//    background-color: $color-white;
+//    border-radius: 11px;
+//    position: relative;
+//    padding: 15px;
+//
+//    &--Ingredients {
+//    }
+//
+//    &--Appareils {
+//    }
+//
+//    &--Ustensiles {
+//    }
+//
+//    &.active {
+//
+//    }
+//  }
+//
+//  .dropdown__input-wrapper {
+//    position: relative;
+//  }
+//
+//  .dropdown__input {
+//    position: relative;
+//    color: $color-primary;
+//    font-family: 'Manrope', sans-serif;
+//    font-weight: 500;
+//    font-size: 16px;
+//    line-height: 22px;
+//    width: 100%;
+//    padding: 5px;
+//    border: none;
+//    background-color: unset;
+//    cursor: pointer;
+//
+//    &::placeholder {
+//      font-weight: 700;
+//      font-size: 18px;
+//      line-height: 22px;
+//      color: $color-black;
+//      opacity: 1;
+//    }
+//
+//    &--Ingredients {
+//      outline: none;
+//      border: none;
+//      padding: 10px 5px 10px 5px;
+//    }
+//
+//    &--Appareils {
+//      outline: none;
+//      border: none;
+//      padding: 10px 5px 10px 5px;
+//    }
+//
+//    &--Ustensiles {
+//      outline: none;
+//      border: none;
+//      padding: 10px 5px 10px 5px;
+//    }
+//  }
+//
+//  .fa-solid {
+//    position: absolute;
+//    top: 50%;
+//    right: 15px;
+//    transform: translateY(-50%);
+//    transition: transform 0.3s ease;
+//    color: $color-black;
+//    font-size: 16px;
+//  }
+//
+//  .dropdown__list {
+//    position: absolute;
+//    top: 100%;
+//    left: 0;
+//    width: 100%;
+//    background-color: $color-white;
+//    display: none;
+//    border-radius: 0 0 11px 11px;
+//
+//    &--Ingredients {
+//    }
+//
+//    &--Appareils {
+//    }
+//
+//    &--Ustensiles {
+//    }
+//
+//    .show {
+//      display: block;
+//    }
+//  }
+//
+//  .dropdown__ingredient-div,
+//  .dropdown__appareil-div,
+//  .dropdown__ustensile-div {
+//
+//  }
+//
+//  .dropdown__ingredient-search,
+//  .dropdown__appareil-search,
+//  .dropdown__ustensile-search {
+//    display: flex;
+//    justify-content: space-between;
+//    align-items: center;
+//
+//    &__icon {
+//      font-size: 20px;
+//      margin-right: 10px;
+//    }
+//  }
+//
+//  .dropdown__ingredient-input,
+//  .dropdown__appareil-input,
+//  .dropdown__ustensile-input {
+//    outline: none;
+//    border: none;
+//    padding: 10px 5px 10px 5px;
+//  }
+//
+//  .fas.fa-search {
+//  }
+//
+//  .fa-chevron-down {
+//    position: absolute;
+//    top: 50%;
+//    right: 15px;
+//    transform: translateY(-50%);
+//    transition: transform 0.3s ease;
+//    color: $color-black;
+//    font-size: 16px;
+//  }
+//
+//  .up {
+//    transform: translateY(-50%) rotate(180deg);
+//  }
+//}
+
 
 
 #dropdown {
@@ -7,25 +157,6 @@
   margin: 25px 0 55px 0;
   padding: 0 102px;
 
-
-  .dropdown__ingredient-search__icon {
-    font-size: 20px;
-    margin-right: 10px;
-  }
-
-
-
-  &__ingredient-div {
-  }
-
-  .dropdown__ingredient-search {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-
-
   .dropdown__block {
     width: 20%;
     background-color: $color-white;
@@ -33,26 +164,8 @@
     position: relative;
     padding: 15px;
 
-    &--ingredient {
-      background-color: lightgreen;
-    }
-
-    &--device {
-      background-color: lightblue;
-    }
-
-    &--utensil {
-      background-color: lightyellow;
-    }
-
-    &.active {
-      border-radius: 11px 11px 0 0;
-    }
-
     .dropdown__input-wrapper {
       position: relative;
-
-
     }
 
     .dropdown__input {
@@ -63,7 +176,6 @@
       font-size: 16px;
       line-height: 22px;
       width: 100%;
-      //padding: 17px 40px 17px 17px;
       padding: 5px;
       border: none;
       background-color: unset;
@@ -76,17 +188,19 @@
         color: $color-black;
         opacity: 1;
       }
+
+      &--Ingredients,
+      &--Appareils,
+      &--Ustensiles {
+        @extend .dropdown__input;
+        outline: none;
+        border: none;
+        padding: 10px 5px;
+      }
     }
 
-    .dropdown__ingredient-input {
-      display: none;
-      outline: none;
-      border: none;
-      padding: 10px 5px 10px 5px;
 
-    }
-
-    .fa-chevron-down {
+    .fa-solid {
       position: absolute;
       top: 50%;
       right: 15px;
@@ -94,14 +208,6 @@
       transition: transform 0.3s ease;
       color: $color-black;
       font-size: 16px;
-    }
-
-    .fa-chevron-down {
-      font-size: 16px;
-    }
-
-    .up {
-      transform: translateY(-50%) rotate(180deg);
     }
 
     .dropdown__list {
@@ -112,30 +218,37 @@
       background-color: $color-white;
       display: none;
       border-radius: 0 0 11px 11px;
+    }
 
-      &.show {
-        display: block;
-      }
+    .dropdown__ingredients-div,
+    .dropdown__appareils-div,
+    .dropdown__ustensiles-div {
+      display: none;
+    }
 
-      li {
-        padding: 5px;
-      }
+    .dropdown__ingredients-search,
+    .dropdown__appareils-search,
+    .dropdown__ustensiles-search {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dropdown__ingredients-input,
+    .dropdown__appareils-input,
+    .dropdown__ustensiles-input {
+      outline: none;
+      border: none;
+      padding: 10px 5px 10px 5px;
+    }
+
+    .fas.fa-search {
+      font-size: 20px;
+      margin-right: 10px;
     }
   }
 
-  .dropdown__input--Ingredients {
-    outline: none;
-    border-radius: 11px;
-    background-color: $color-white;
-  }
-
-  .dropdown__input--Appareils {
-    border-radius: 11px;
-    background-color: $color-white;
-  }
-
-  .dropdown__input--Ustensiles {
-    border-radius: 11px;
-    background-color: $color-white;
-  }
+  //.show {
+  //  display: block;
+  //}
 }
