@@ -24,7 +24,6 @@ export function displayFormSection() {
 
   const mainElement = document.querySelector("main");
   mainElement.appendChild(section);
-
 }
 
 
