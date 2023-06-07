@@ -1,3 +1,4 @@
+import {searchRecipes} from "./searchNativeLoops.js";
 
 export function displayFormSection() {
   const section = document.createElement("section");
@@ -24,8 +25,12 @@ export function displayFormSection() {
 
   const mainElement = document.querySelector("main");
   mainElement.appendChild(section);
-}
 
+  input.addEventListener("input", (event) => {
+    const query = event.target.value;
+    searchRecipes(query);
+  });
+}
 
 
 
