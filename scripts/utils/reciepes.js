@@ -98,3 +98,5 @@ export function createRecipeCard() {
 
   mainElement.appendChild(section);
 }
+
+
