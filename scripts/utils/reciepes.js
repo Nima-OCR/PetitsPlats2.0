@@ -96,6 +96,5 @@ export function renderRecipes(recipes) {
   mainElement.appendChild(section);
 }
 
-document.addEventListener('DOMContentLoaded', (event) => {
-  renderRecipes(recipesOld);
-});
+renderRecipes(recipesOld);
+

@@ -84,5 +84,3 @@ export function searchRecipes(query) {
 
   updateSearchResults(searchResults);
 }
-
-
