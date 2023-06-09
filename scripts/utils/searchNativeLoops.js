@@ -6,6 +6,8 @@ function textIncludes(item, query) {
   return lowerCaseItem.includes(query);
 }
 
+
+
 // Vérification de correspondance d'une recette avec une requête
 function isQueryContainedInRecipe(name, ingredients, description, query) {
   if (textIncludes(name, query)) {
@@ -25,6 +27,8 @@ function isQueryContainedInRecipe(name, ingredients, description, query) {
   return false;
 }
 
+
+
 // Cette fonction masque toutes les recettes de l'interface utilisateur
 function hideAllRecipes() {
   const recipes = document.getElementsByClassName('recipe-article');
@@ -32,6 +36,7 @@ function hideAllRecipes() {
     recipes[i].style.display = 'none';
   }
 }
+
 
 // Met à jour l'interface utilisateur avec les résultats de la recherche.
 function updateSearchResults(results) {

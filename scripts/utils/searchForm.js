@@ -31,7 +31,3 @@ export function displayFormSection() {
     searchRecipes(query);
   });
 }
-
-
-
-

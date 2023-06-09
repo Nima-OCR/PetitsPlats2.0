@@ -79,5 +79,5 @@ export function createDropdownSection() {
   dropdownSection.appendChild(ustensilesBlock);
 
   const mainElement = document.querySelector('main');
-  mainElement.appendChild(dropdownSection);
+  // mainElement.appendChild(dropdownSection);
 }
