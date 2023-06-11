@@ -144,6 +144,22 @@ main {
   border: none;
   padding: 10px 5px 10px 5px;
 }
+#dropdown .dropdown__block .dropdown__ingredients-list,
+#dropdown .dropdown__block .dropdown__appareils-list,
+#dropdown .dropdown__block .dropdown__ustensiles-list {
+  display: none;
+  height: 315px;
+  overflow: auto; /* Ajoutez cette ligne */
+}
+#dropdown .dropdown__block .dropdown__ingredients-list p,
+#dropdown .dropdown__block .dropdown__appareils-list p,
+#dropdown .dropdown__block .dropdown__ustensiles-list p {
+  font-family: "Manrope", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+}
 #dropdown .dropdown__block .fas.fa-search {
   font-size: 20px;
   margin-right: 10px;

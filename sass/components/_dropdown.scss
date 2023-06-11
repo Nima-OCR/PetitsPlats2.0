@@ -90,6 +90,22 @@
       padding: 10px 5px 10px 5px;
     }
 
+    .dropdown__ingredients-list,
+    .dropdown__appareils-list,
+    .dropdown__ustensiles-list {
+      display: none;
+      height: 315px;
+      overflow: auto; /* Ajoutez cette ligne */
+      p {
+        font-family: 'Manrope', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19px;
+      }
+    }
+
+
     .fas.fa-search {
       font-size: 20px;
       margin-right: 10px;

@@ -1,4 +1,4 @@
-import { recipesOld } from "../../data/recipesOld.js";
+import { recipes } from "../../data/recipes.js";
 
 // Permet de vérifier si une partie du texte correspond à la recherche effectuée par l'utilisateur.
 function textIncludes(item, query) {
@@ -44,8 +44,8 @@ function updateSearchResults(results) {
 
   if (!results.length) {
     // Affiche toutes les recettes si aucun résultat n'est trouvé
-    for (let i = 0; i < recipesOld.length; i++) {
-      const recipeElement = document.getElementById(recipesOld[i].id);
+    for (let i = 0; i < recipes.length; i++) {
+      const recipeElement = document.getElementById(recipes[i].id);
       if (recipeElement) {
         recipeElement.style.display = 'block';
       }
@@ -68,7 +68,7 @@ export function searchRecipes(query) {
 
   if (lowerCaseQuery.length === 0) {
     // Affiche toutes les recettes si la recherche est vide
-    updateSearchResults(recipesOld);
+    updateSearchResults(recipes);
     return;
   }
 
@@ -76,8 +76,8 @@ export function searchRecipes(query) {
     return; // La recherche n'est pas effectuée si elle contient moins de 3 caractères
   }
 
-  for (let i = 0; i < recipesOld.length; i++) {
-    const recipe = recipesOld[i];
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
 
     if (
       textIncludes(recipe.name, lowerCaseQuery) ||
