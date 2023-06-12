@@ -1,14 +1,13 @@
 import {recipes} from "../../data/recipes.js";
 
-
-
-
+// Fonction pour créer un élément avec une classe
 function createElementWithClass(elementType, className) {
   const element = document.createElement(elementType);
   element.className = className;
   return element;
 }
 
+// Fonction pour créer la section de menu déroulant
 export function createDropdownSection() {
   const dropdownSection = document.getElementById('dropdown');
   dropdownSection.id = 'dropdown';
@@ -22,12 +21,11 @@ export function createDropdownSection() {
   dropdownSection.appendChild(ustensilesBlock);
 }
 
+// Crée un bloc de dropdown chaque type du menu déroulant
 function createBlock(type) {
 
   const block = createElementWithClass('div', `dropdown__block dropdown__block--${type}`);
-
   const inputWrapper = createElementWithClass('div', 'dropdown__input-wrapper');
-
   const input = createElementWithClass('input', `dropdown__input dropdown__input--${type}`);
   input.type = 'text';
   input.placeholder = type;
@@ -38,62 +36,51 @@ function createBlock(type) {
   inputWrapper.appendChild(chevron);
   block.appendChild(inputWrapper);
 
-  const dropdownList = document.createElement('ul');
-  dropdownList.className = `dropdown__list dropdown__list--${type}`;
+  // const dropdownList = document.createElement('ul');
+  // dropdownList.className = `dropdown__list dropdown__list--${type}`;
+  //
+  // block.appendChild(dropdownList);
 
-  block.appendChild(dropdownList);
-
-  const inputDivElement = document.createElement('div');
-  inputDivElement.className = `dropdown__${type.toLowerCase()}-div`;
+  const inputDivElement = createElementWithClass('div', `dropdown__${type.toLowerCase()}-div`);
   block.appendChild(inputDivElement);
 
-  const ingredientsListDiv = document.createElement('div');
-  ingredientsListDiv.className = `dropdown__${type.toLowerCase()}-ingredients`;
+  // const ingredientsListDiv = createElementWithClass('div', `dropdown__${type.toLowerCase()}-ingredients`);
 
+  // const ingredientsListDiv = document.createElement('div');
+  // ingredientsListDiv.className = `dropdown__${type.toLowerCase()}-ingredients`;
 
-  const divSearchInputElement = document.createElement('div');
-  divSearchInputElement.className = `dropdown__${type.toLowerCase()}-search`;
+  const divSearchInputElement  = createElementWithClass('div', `dropdown__${type.toLowerCase()}-search`);
   inputDivElement.appendChild(divSearchInputElement);
 
-  const customInput = document.createElement('input');
+  const customInput  = createElementWithClass('input', `dropdown__${type.toLowerCase()}-input`);
   customInput.type = 'text';
-  customInput.className = `dropdown__${type.toLowerCase()}-input`;
   customInput.placeholder = `Chercher un ${type.toLowerCase()}`;
   customInput.style.display = 'none';
   divSearchInputElement.appendChild(customInput);
 
-  const icon = document.createElement('i');
-  icon.className = `fas fa-search dropdown__${type.toLowerCase()}-search__icon`;
+  const icon  = createElementWithClass('i', `fas fa-search dropdown__${type.toLowerCase()}-search__icon`);
   icon.style.display = 'none';
   divSearchInputElement.appendChild(icon);
 
+  const ingredientsListDiv  = createElementWithClass('div', `dropdown__${type.toLowerCase()}-list`);
+  const appliancesListDiv  = createElementWithClass('div', `dropdown__${type.toLowerCase()}-list`);
+  const ustensilsListDiv  = createElementWithClass('div', `dropdown__${type.toLowerCase()}-list`);
+
+
   if (type === 'Ingredients') {
-
-    ingredientsDropdown(input, icon, inputDivElement, customInput, chevron);
-    const allIngredients = getIngredients();
-    const ingredientsListDiv = document.createElement('div');
-    ingredientsListDiv.className = `dropdown__${type.toLowerCase()}-list`;
-    ingredientsListDiv.style.display = 'block';
-
-    createListElements(allIngredients, ingredientsListDiv);
+    const ingredients = getIngredients();
+    toggleDropdown(input, icon, inputDivElement, customInput, chevron, ingredientsListDiv);
+    createListElements(ingredients, ingredientsListDiv);
     block.appendChild(ingredientsListDiv);
-
-  } else if (type === 'Appareils') {
-    appareilsDropdown(input, icon, inputDivElement, customInput, chevron);
+  }
+  else if (type === 'Appareils') {
     const appliances = getAppliances();
-    const appliancesListDiv = document.createElement('div');
-    appliancesListDiv.className = `dropdown__${type.toLowerCase()}-list`;
-    appliancesListDiv.style.display = 'block';
+    toggleDropdown(input, icon, inputDivElement, customInput, chevron, appliancesListDiv);
     createListElements(appliances, appliancesListDiv);
     block.appendChild(appliancesListDiv);
-
-
   } else if (type === 'Ustensiles') {
-    ustensilesDropdown(input, icon, inputDivElement, customInput, chevron);
     const ustensils = getUstensils();
-    const ustensilsListDiv = document.createElement('div');
-    ustensilsListDiv.className = `dropdown__${type.toLowerCase()}-list`;
-    ustensilsListDiv.style.display = 'block';
+    toggleDropdown(input, icon, inputDivElement, customInput, chevron, ustensilsListDiv);
     createListElements(ustensils, ustensilsListDiv);
     block.appendChild(ustensilsListDiv);
   }
@@ -101,19 +88,8 @@ function createBlock(type) {
   return block;
 }
 
-function ingredientsDropdown(input, icon, inputDivElement, customInput, chevron) {
-  inputVisibility(input, icon, inputDivElement, customInput, chevron);
-}
-
-function appareilsDropdown(input, icon, inputDivElement, customInput, chevron) {
-  inputVisibility(input, icon, inputDivElement, customInput, chevron);
-}
-
-function ustensilesDropdown(input, icon, inputDivElement, customInput, chevron) {
-  inputVisibility(input, icon, inputDivElement, customInput, chevron);
-}
-
-function inputVisibility(input, icon, inputDivElement, customInput, chevron) {
+// Affiche ou masquage la liste déroulante
+function toggleDropdown(input, icon, inputDivElement, customInput, chevron, ingredientsListDiv) {
   let isInputVisible = false;
 
   input.addEventListener('click', () => {
@@ -122,19 +98,31 @@ function inputVisibility(input, icon, inputDivElement, customInput, chevron) {
       inputDivElement.style.display = 'none';
       customInput.style.display = 'none';
       chevron.classList.remove('up');
+      ingredientsListDiv.style.display = 'none';
+
     } else {
       icon.style.display = 'block';
       inputDivElement.style.display = 'block';
       customInput.style.display = 'block';
       inputDivElement.style.border = '1px solid lightgrey';
       chevron.classList.add('up');
+      ingredientsListDiv.style.display = 'block';
     }
     isInputVisible = !isInputVisible;
   });
 }
 
+// Crée un élément pour chaque item
+function createListElements(data, container) {
+  for (let i = 0; i < data.length; i++) {
+    const item = data[i];
+    const element  = createElementWithClass('p', ``);
+    element.textContent = item;
+    container.appendChild(element);
+  }
+}
 
-
+// Extrait les ingrédients et retourne une liste d'ingrédients sans doublons
 function getIngredients() {
   const ingredients = [];
   for (let i = 0; i < recipes.length; i++) {
@@ -149,6 +137,7 @@ function getIngredients() {
   return ingredients;
 }
 
+// Extrait les appareils et retourne une liste d'appareils sans doublons
 function getAppliances() {
   const appliances = [];
   for (let i = 0; i < recipes.length; i++) {
@@ -161,6 +150,7 @@ function getAppliances() {
   return appliances;
 }
 
+// Extrait les ustensiles et retourne une liste d'ustensiles sans doublons
 function getUstensils() {
   const ustensils = [];
   for (let i = 0; i < recipes.length; i++) {
@@ -175,17 +165,4 @@ function getUstensils() {
     }
   }
   return ustensils;
-}
-
-
-
-
-
-function createListElements(data, container) {
-  for (let i = 0; i < data.length; i++) {
-    const item = data[i];
-    const element = document.createElement('p');
-    element.textContent = item;
-    container.appendChild(element);
-  }
 }

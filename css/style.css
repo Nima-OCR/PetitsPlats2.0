@@ -165,6 +165,9 @@ main {
   font-size: 20px;
   margin-right: 10px;
 }
+#dropdown .show {
+  display: block;
+}
 
 #recipes {
   display: flex;
