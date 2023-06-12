@@ -1,3 +1,8 @@
+import {recipes} from "../../data/recipes.js";
+
+
+
+
 function createElementWithClass(elementType, className) {
   const element = document.createElement(elementType);
   element.className = className;
@@ -18,6 +23,7 @@ export function createDropdownSection() {
 }
 
 function createBlock(type) {
+
   const block = createElementWithClass('div', `dropdown__block dropdown__block--${type}`);
 
   const inputWrapper = createElementWithClass('div', 'dropdown__input-wrapper');
@@ -41,6 +47,10 @@ function createBlock(type) {
   inputDivElement.className = `dropdown__${type.toLowerCase()}-div`;
   block.appendChild(inputDivElement);
 
+  const ingredientsListDiv = document.createElement('div');
+  ingredientsListDiv.className = `dropdown__${type.toLowerCase()}-ingredients`;
+
+
   const divSearchInputElement = document.createElement('div');
   divSearchInputElement.className = `dropdown__${type.toLowerCase()}-search`;
   inputDivElement.appendChild(divSearchInputElement);
@@ -58,11 +68,34 @@ function createBlock(type) {
   divSearchInputElement.appendChild(icon);
 
   if (type === 'Ingredients') {
+
     ingredientsDropdown(input, icon, inputDivElement, customInput, chevron);
+    const allIngredients = getIngredients();
+    const ingredientsListDiv = document.createElement('div');
+    ingredientsListDiv.className = `dropdown__${type.toLowerCase()}-list`;
+    ingredientsListDiv.style.display = 'block';
+
+    createListElements(allIngredients, ingredientsListDiv);
+    block.appendChild(ingredientsListDiv);
+
   } else if (type === 'Appareils') {
     appareilsDropdown(input, icon, inputDivElement, customInput, chevron);
+    const appliances = getAppliances();
+    const appliancesListDiv = document.createElement('div');
+    appliancesListDiv.className = `dropdown__${type.toLowerCase()}-list`;
+    appliancesListDiv.style.display = 'block';
+    createListElements(appliances, appliancesListDiv);
+    block.appendChild(appliancesListDiv);
+
+
   } else if (type === 'Ustensiles') {
     ustensilesDropdown(input, icon, inputDivElement, customInput, chevron);
+    const ustensils = getUstensils();
+    const ustensilsListDiv = document.createElement('div');
+    ustensilsListDiv.className = `dropdown__${type.toLowerCase()}-list`;
+    ustensilsListDiv.style.display = 'block';
+    createListElements(ustensils, ustensilsListDiv);
+    block.appendChild(ustensilsListDiv);
   }
 
   return block;
@@ -98,4 +131,61 @@ function inputVisibility(input, icon, inputDivElement, customInput, chevron) {
     }
     isInputVisible = !isInputVisible;
   });
+}
+
+
+
+function getIngredients() {
+  const ingredients = [];
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
+    for (let j = 0; j < recipe.ingredients.length; j++) {
+      const ingredient = recipe.ingredients[j].ingredient;
+      if (!ingredients.includes(ingredient)) {
+        ingredients.push(ingredient);
+      }
+    }
+  }
+  return ingredients;
+}
+
+function getAppliances() {
+  const appliances = [];
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
+    const appliance = recipe.appliance;
+    if (!appliances.includes(appliance)) {
+      appliances.push(appliance);
+    }
+  }
+  return appliances;
+}
+
+function getUstensils() {
+  const ustensils = [];
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
+    if (recipe.ustensils) {
+      for (let j = 0; j < recipe.ustensils.length; j++) {
+        const ustensil = recipe.ustensils[j];
+        if (!ustensils.includes(ustensil)) {
+          ustensils.push(ustensil);
+        }
+      }
+    }
+  }
+  return ustensils;
+}
+
+
+
+
+
+function createListElements(data, container) {
+  for (let i = 0; i < data.length; i++) {
+    const item = data[i];
+    const element = document.createElement('p');
+    element.textContent = item;
+    container.appendChild(element);
+  }
 }
