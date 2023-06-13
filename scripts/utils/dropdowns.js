@@ -36,18 +36,8 @@ function createBlock(type) {
   inputWrapper.appendChild(chevron);
   block.appendChild(inputWrapper);
 
-  // const dropdownList = document.createElement('ul');
-  // dropdownList.className = `dropdown__list dropdown__list--${type}`;
-  //
-  // block.appendChild(dropdownList);
-
   const inputDivElement = createElementWithClass('div', `dropdown__${type.toLowerCase()}-div`);
   block.appendChild(inputDivElement);
-
-  // const ingredientsListDiv = createElementWithClass('div', `dropdown__${type.toLowerCase()}-ingredients`);
-
-  // const ingredientsListDiv = document.createElement('div');
-  // ingredientsListDiv.className = `dropdown__${type.toLowerCase()}-ingredients`;
 
   const divSearchInputElement  = createElementWithClass('div', `dropdown__${type.toLowerCase()}-search`);
   inputDivElement.appendChild(divSearchInputElement);
@@ -66,30 +56,29 @@ function createBlock(type) {
   const appliancesListDiv  = createElementWithClass('div', `dropdown__${type.toLowerCase()}-list`);
   const ustensilsListDiv  = createElementWithClass('div', `dropdown__${type.toLowerCase()}-list`);
 
-
   if (type === 'Ingredients') {
     const ingredients = getIngredients();
-    toggleDropdown(input, icon, inputDivElement, customInput, chevron, ingredientsListDiv);
     createListElements(ingredients, ingredientsListDiv);
     block.appendChild(ingredientsListDiv);
+    toggleDropdown(input, icon, inputDivElement, customInput, chevron, ingredientsListDiv);
+
   }
   else if (type === 'Appareils') {
     const appliances = getAppliances();
-    toggleDropdown(input, icon, inputDivElement, customInput, chevron, appliancesListDiv);
     createListElements(appliances, appliancesListDiv);
     block.appendChild(appliancesListDiv);
+    toggleDropdown(input, icon, inputDivElement, customInput, chevron, appliancesListDiv);
   } else if (type === 'Ustensiles') {
     const ustensils = getUstensils();
-    toggleDropdown(input, icon, inputDivElement, customInput, chevron, ustensilsListDiv);
     createListElements(ustensils, ustensilsListDiv);
     block.appendChild(ustensilsListDiv);
+    toggleDropdown(input, icon, inputDivElement, customInput, chevron, ustensilsListDiv);
   }
-
   return block;
 }
 
 // Affiche ou masquage la liste déroulante
-function toggleDropdown(input, icon, inputDivElement, customInput, chevron, ingredientsListDiv) {
+function toggleDropdown(input, icon, inputDivElement, customInput, chevron, listDiv) {
   let isInputVisible = false;
 
   input.addEventListener('click', () => {
@@ -98,15 +87,14 @@ function toggleDropdown(input, icon, inputDivElement, customInput, chevron, ingr
       inputDivElement.style.display = 'none';
       customInput.style.display = 'none';
       chevron.classList.remove('up');
-      ingredientsListDiv.style.display = 'none';
-
+      listDiv.style.display = 'none';
     } else {
       icon.style.display = 'block';
       inputDivElement.style.display = 'block';
       customInput.style.display = 'block';
       inputDivElement.style.border = '1px solid lightgrey';
       chevron.classList.add('up');
-      ingredientsListDiv.style.display = 'block';
+      listDiv.style.display = 'block';
     }
     isInputVisible = !isInputVisible;
   });

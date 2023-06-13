@@ -74,6 +74,7 @@ main {
 }
 #dropdown .dropdown__block {
   width: 20%;
+  height: fit-content;
   background-color: #FFFFFF;
   border-radius: 11px;
   position: relative;
