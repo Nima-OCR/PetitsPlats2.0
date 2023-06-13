@@ -117,6 +117,9 @@ main {
   color: #000000;
   font-size: 16px;
 }
+#dropdown .dropdown__block .fa-solid--up {
+  transform: translateY(-50%) rotate(180deg);
+}
 #dropdown .dropdown__block .dropdown__list {
   position: absolute;
   top: 100%;

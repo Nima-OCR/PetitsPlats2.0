@@ -77,26 +77,41 @@ function createBlock(type) {
   return block;
 }
 
+let currentOpenDropdown = null;
+let isInputVisible = false;
+
+// Fermeture des dropdowns
+function closeDropdown(dropdown) {
+  const {icon, inputDivElement, customInput, chevron, listDiv} = dropdown;
+  icon.style.display = 'none';
+  inputDivElement.style.display = 'none';
+  customInput.style.display = 'none';
+  chevron.classList.remove('fa-solid--up');
+  listDiv.style.display = 'none';
+  isInputVisible = false;
+}
+
 // Affiche ou masquage la liste déroulante
 function toggleDropdown(input, icon, inputDivElement, customInput, chevron, listDiv) {
-  let isInputVisible = false;
+  const dropdown = {input, icon, inputDivElement, customInput, chevron, listDiv};
 
   input.addEventListener('click', () => {
-    if (isInputVisible) {
-      icon.style.display = 'none';
-      inputDivElement.style.display = 'none';
-      customInput.style.display = 'none';
-      chevron.classList.remove('up');
-      listDiv.style.display = 'none';
+    if (isInputVisible && dropdown === currentOpenDropdown) {
+      closeDropdown(dropdown);
+      currentOpenDropdown = null;
     } else {
+      if (currentOpenDropdown) {
+        closeDropdown(currentOpenDropdown);
+      }
       icon.style.display = 'block';
       inputDivElement.style.display = 'block';
       customInput.style.display = 'block';
       inputDivElement.style.border = '1px solid lightgrey';
-      chevron.classList.add('up');
+      chevron.classList.add('fa-solid--up');
       listDiv.style.display = 'block';
+      currentOpenDropdown = dropdown;
+      isInputVisible = true;
     }
-    isInputVisible = !isInputVisible;
   });
 }
 
