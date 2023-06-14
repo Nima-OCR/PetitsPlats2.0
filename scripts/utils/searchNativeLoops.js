@@ -6,8 +6,6 @@ function textIncludes(item, query) {
   return lowerCaseItem.includes(query);
 }
 
-
-
 // Vérification de correspondance d'une recette avec une requête
 function isQueryContainedInRecipe(name, ingredients, description, query) {
   if (textIncludes(name, query)) {
@@ -27,20 +25,18 @@ function isQueryContainedInRecipe(name, ingredients, description, query) {
   return false;
 }
 
-
-
-// Cette fonction masque toutes les recettes de l'interface utilisateur
-function hideAllRecipes() {
-  const recipes = document.getElementsByClassName('recipe-article');
-  for (let i = 0; i < recipes.length; i++) {
-    recipes[i].style.display = 'none';
+// Cette fonction masque toutes les recettes
+function hideAllElements(className) {
+  const elements = document.getElementsByClassName(className);
+  for (let i = 0; i < elements.length; i++) {
+    elements[i].style.display = 'none';
   }
 }
 
 
 // Met à jour l'interface utilisateur avec les résultats de la recherche.
 function updateSearchResults(results) {
-  hideAllRecipes();
+  hideAllElements('recipe-article');
 
   if (!results.length) {
     // Affiche toutes les recettes si aucun résultat n'est trouvé
