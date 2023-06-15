@@ -27,7 +27,7 @@ main {
 .form-section {
   width: 62%;
   position: absolute;
-  top: 45%;
+  top: 46%;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -71,6 +71,17 @@ main {
   gap: 66px;
   margin: 25px 0 55px 0;
   padding: 0 102px;
+}
+#dropdown .dropdown__title {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-family: "Anton", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 32px;
 }
 #dropdown .dropdown__block {
   width: 20%;
@@ -318,7 +329,7 @@ header .header__logo {
 }
 header .header__heading {
   position: absolute;
-  bottom: 290px;
+  bottom: 288px;
   padding: 0 337px;
   width: 100%;
   height: 132px;
