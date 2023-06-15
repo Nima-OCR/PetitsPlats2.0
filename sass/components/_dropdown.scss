@@ -5,6 +5,18 @@
   margin: 25px 0 55px 0;
   padding: 0 102px;
 
+  .dropdown__title {
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-family: 'Anton', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 32px;
+  }
+
   .dropdown__block {
     width: 20%;
     height: fit-content;

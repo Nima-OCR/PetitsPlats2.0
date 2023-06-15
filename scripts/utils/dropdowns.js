@@ -165,4 +165,8 @@ export function createDropdownSection() {
   dropdownSection.appendChild(ingredientsBlock);
   dropdownSection.appendChild(appareilsBlock);
   dropdownSection.appendChild(ustensilesBlock);
+
+  const dropdownTitle = createElementWithClass('h2', 'dropdown__title');
+  dropdownTitle.textContent = '1500 recettes';
+  dropdownSection.appendChild(dropdownTitle);
 }
