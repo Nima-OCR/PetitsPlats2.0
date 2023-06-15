@@ -23,8 +23,8 @@ export function displayFormSection() {
   form.appendChild(icon);
   section.appendChild(form);
 
-  const mainElement = document.querySelector("main");
-  mainElement.appendChild(section);
+  const headerElement = document.querySelector("header");
+  headerElement.appendChild(section);
 
   input.addEventListener("input", (event) => {
     const query = event.target.value;

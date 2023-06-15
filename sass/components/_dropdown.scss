@@ -1,15 +1,20 @@
 #dropdown {
+  width: 100%;
+  max-height: 72px;
   display: flex;
   justify-content: flex-start;
+  position: absolute;
   gap: 66px;
   margin: 25px 0 55px 0;
   padding: 0 102px;
 
   .dropdown__title {
-    width: 50%;
-    display: flex;
-    justify-content: flex-end;
+    position: absolute;
+    top: 50%;
+    left: 88%;
+    transform: translate(-50%, -50%);
     align-items: center;
+    max-width: 100%;
     font-family: 'Anton', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -23,6 +28,7 @@
     background-color: $color-white;
     border-radius: 11px;
     position: relative;
+    z-index: 2;
     padding: 15px;
 
     .dropdown__input-wrapper {
@@ -110,7 +116,7 @@
     .dropdown__appareils-list,
     .dropdown__ustensiles-list {
       display: none;
-      height: 315px;
+      max-height: 250px;
       overflow: auto;
       p {
         font-family: 'Manrope', sans-serif;

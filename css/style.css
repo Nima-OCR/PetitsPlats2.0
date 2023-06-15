@@ -22,12 +22,13 @@ main {
   background-color: #C6C6C6;
   max-width: 1440px;
   width: 100%;
+  position: relative;
 }
 
 .form-section {
   width: 62%;
   position: absolute;
-  top: 46%;
+  bottom: 190px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -66,17 +67,22 @@ main {
 }
 
 #dropdown {
+  width: 100%;
+  max-height: 72px;
   display: flex;
   justify-content: flex-start;
+  position: absolute;
   gap: 66px;
   margin: 25px 0 55px 0;
   padding: 0 102px;
 }
 #dropdown .dropdown__title {
-  width: 50%;
-  display: flex;
-  justify-content: flex-end;
+  position: absolute;
+  top: 50%;
+  left: 88%;
+  transform: translate(-50%, -50%);
   align-items: center;
+  max-width: 100%;
   font-family: "Anton", sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -89,6 +95,7 @@ main {
   background-color: #FFFFFF;
   border-radius: 11px;
   position: relative;
+  z-index: 2;
   padding: 15px;
 }
 #dropdown .dropdown__block .dropdown__input-wrapper {
@@ -163,7 +170,7 @@ main {
 #dropdown .dropdown__block .dropdown__appareils-list,
 #dropdown .dropdown__block .dropdown__ustensiles-list {
   display: none;
-  height: 315px;
+  max-height: 250px;
   overflow: auto;
 }
 #dropdown .dropdown__block .dropdown__ingredients-list p,
@@ -187,6 +194,7 @@ main {
 #recipes {
   display: flex;
   justify-content: space-between;
+  margin-top: 150px;
   flex-wrap: wrap;
   gap: 66px 48px;
   padding: 0 102px;
@@ -312,6 +320,9 @@ main {
   width: 155px;
 }
 
+header {
+  position: relative;
+}
 header .header {
   position: relative;
   width: 100%;
