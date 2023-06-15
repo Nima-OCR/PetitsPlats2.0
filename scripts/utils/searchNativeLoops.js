@@ -6,25 +6,6 @@ function textIncludes(item, query) {
   return lowerCaseItem.includes(query);
 }
 
-// Vérification de correspondance d'une recette avec une requête
-function isQueryContainedInRecipe(name, ingredients, description, query) {
-  if (textIncludes(name, query)) {
-    return true;
-  }
-
-  for (let i = 0; i < ingredients.length; i++) {
-    if (textIncludes(ingredients[i].ingredient, query)) {
-      return true;
-    }
-  }
-
-  if (textIncludes(description, query)) {
-    return true;
-  }
-
-  return false;
-}
-
 // Cette fonction masque toutes les recettes
 function hideAllElements(className) {
   const elements = document.getElementsByClassName(className);
@@ -74,12 +55,18 @@ export function searchRecipes(query) {
 
   for (let i = 0; i < recipes.length; i++) {
     const recipe = recipes[i];
+    const ingredients = recipe.ingredients;
 
-    if (
-      textIncludes(recipe.name, lowerCaseQuery) ||
-      isQueryContainedInRecipe(recipe.name, recipe.ingredients, recipe.description, lowerCaseQuery)
-    ) {
+    if (textIncludes(recipe.name, lowerCaseQuery)) {
       searchResults.push(recipe);
+    } else {
+      for (let j = 0; j < ingredients.length; j++) {
+        const ingredient = ingredients[j].ingredient.toLowerCase();
+        if (ingredient.includes(lowerCaseQuery)) {
+          searchResults.push(recipe);
+          break; // Sort de la boucle si un ingrédient correspondant est trouvé
+        }
+      }
     }
   }
 
