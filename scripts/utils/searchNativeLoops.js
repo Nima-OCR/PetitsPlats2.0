@@ -1,34 +1,24 @@
 import { recipes } from "../../data/recipes.js";
 
-// Permet de vérifier si une partie du texte correspond à la recherche effectuée par l'utilisateur.
 function textIncludes(item, query) {
   const lowerCaseItem = item.toLowerCase();
   return lowerCaseItem.includes(query);
 }
 
-// Cette fonction masque toutes les recettes
-function hideAllElements(className) {
+function setElementsVisibility(className, displayStyle) {
   const elements = document.getElementsByClassName(className);
   for (let i = 0; i < elements.length; i++) {
-    elements[i].style.display = 'none';
+    elements[i].style.display = displayStyle;
   }
 }
 
-
-// Met à jour l'interface utilisateur avec les résultats de la recherche.
 function updateSearchResults(results) {
-  hideAllElements('recipe-article');
+  setElementsVisibility('recipe-article', 'none');
 
   if (!results.length) {
-    // Affiche toutes les recettes si aucun résultat n'est trouvé
-    for (let i = 0; i < recipes.length; i++) {
-      const recipeElement = document.getElementById(recipes[i].id);
-      if (recipeElement) {
-        recipeElement.style.display = 'block';
-      }
-    }
+    setElementsVisibility('recipe-article', 'block');
+
   } else {
-    // Affiche les recettes correspondantes aux résultats de recherche
     for (let i = 0; i < results.length; i++) {
       const recipeElement = document.getElementById(results[i].id);
       if (recipeElement) {
@@ -38,19 +28,68 @@ function updateSearchResults(results) {
   }
 }
 
-// Effectue la recherche de recettes en fonction de l'input fournie
+function searchItems(matchingRecipes, itemType, container) {
+  container.innerHTML = '';
+
+  let hasResults = false;
+  let displayedItems = [];
+
+  for (let i = 0; i < matchingRecipes.length; i++) {
+    const recipe = matchingRecipes[i];
+    let items;
+
+    // Si l'itemType est 'appliance', nous devons le traiter comme une chaîne de caractères
+    if (itemType === 'appliance') {
+      items = [recipe[itemType].toLowerCase()]; // Créer un tableau avec un seul élément converti en minuscules
+    } else {
+      items = [];
+      for(let i = 0; i < recipe[itemType].length; i++) {
+        if (typeof recipe[itemType][i] === 'string') {
+          items.push(recipe[itemType][i].toLowerCase());
+        } else {
+          items.push(recipe[itemType][i].ingredient.toLowerCase());
+        }
+      }
+
+    }
+
+    for (let j = 0; j < items.length; j++) {
+      const item = items[j];
+
+      if (!displayedItems.includes(item)) {
+        const itemElement = document.createElement('p');
+        itemElement.textContent = item;
+        container.appendChild(itemElement);
+        displayedItems.push(item);
+        hasResults = true;
+      }
+    }
+  }
+
+  if (!hasResults) {
+    const noResultsElement = document.createElement('p');
+    noResultsElement.textContent = 'Aucun résultat trouvé.';
+    container.appendChild(noResultsElement);
+  }
+}
+
 export function searchRecipes(query) {
   const lowerCaseQuery = query.toLowerCase();
-  const searchResults = [];
+  const matchingRecipes = [];
 
   if (lowerCaseQuery.length === 0) {
-    // Affiche toutes les recettes si la recherche est vide
-    updateSearchResults(recipes);
+    updateSearchResults(matchingRecipes);
+    searchItems(matchingRecipes, 'ingredients', document.querySelector('.dropdown__ingredients-list'));
+
+    // Nous appelons la fonction avec l'appareil
+    searchItems(matchingRecipes, 'appliance', document.querySelector('.dropdown__appareils-list'));
+
+    searchItems(matchingRecipes, 'ustensils', document.querySelector('.dropdown__ustensiles-list'));
     return;
   }
 
   if (lowerCaseQuery.length < 3) {
-    return; // La recherche n'est pas effectuée si elle contient moins de 3 caractères
+    return;
   }
 
   for (let i = 0; i < recipes.length; i++) {
@@ -58,17 +97,20 @@ export function searchRecipes(query) {
     const ingredients = recipe.ingredients;
 
     if (textIncludes(recipe.name, lowerCaseQuery)) {
-      searchResults.push(recipe);
+      matchingRecipes.push(recipe);
     } else {
       for (let j = 0; j < ingredients.length; j++) {
         const ingredient = ingredients[j].ingredient.toLowerCase();
         if (ingredient.includes(lowerCaseQuery)) {
-          searchResults.push(recipe);
-          break; // Sort de la boucle si un ingrédient correspondant est trouvé
+          matchingRecipes.push(recipe);
+          break;
         }
       }
     }
   }
 
-  updateSearchResults(searchResults);
+  updateSearchResults(matchingRecipes);
+  searchItems(matchingRecipes, 'ingredients', document.querySelector('.dropdown__ingredients-list'));
+  searchItems(matchingRecipes, 'appliance', document.querySelector('.dropdown__appareils-list'));
+  searchItems(matchingRecipes, 'ustensils', document.querySelector('.dropdown__ustensiles-list'));
 }
