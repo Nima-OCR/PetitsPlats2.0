@@ -9,3 +9,4 @@ createHeaderLogo();
 displayFormSection();
 createDropdownSection();
 createRecipeCard();
+
