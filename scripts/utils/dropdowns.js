@@ -1,73 +1,26 @@
-import {recipes} from "../../data/recipes.js";
+import {getItems, searchRecipes} from "./searchNativeLoops.js";
 
 let currentOpenDropdown = null;
 let isInputVisible = false;
 
-// Créer des éléments avec une classe
 function createElementWithClass(elementType, className) {
   const element = document.createElement(elementType);
   element.className = className;
   return element;
 }
 
-// Extrait les ingrédients
-function getIngredients() {
-  const ingredients = [];
-  for (let i = 0; i < recipes.length; i++) {
-    const recipe = recipes[i];
-    for (let j = 0; j < recipe.ingredients.length; j++) {
-      const ingredient = recipe.ingredients[j].ingredient;
-      if (!ingredients.includes(ingredient)) {
-        ingredients.push(ingredient);
-      }
-    }
-  }
-  return ingredients;
-}
-
-// Extrait les appareils
-function getAppliances() {
-  const appliances = [];
-  for (let i = 0; i < recipes.length; i++) {
-    const recipe = recipes[i];
-    const appliance = recipe.appliance;
-    if (!appliances.includes(appliance)) {
-      appliances.push(appliance);
-    }
-  }
-  return appliances;
-}
-
-// Extrait les ustensiles
-function getUstensils() {
-  const ustensils = [];
-  for (let i = 0; i < recipes.length; i++) {
-    const recipe = recipes[i];
-    if (recipe.ustensils) {
-      for (let j = 0; j < recipe.ustensils.length; j++) {
-        const ustensil = recipe.ustensils[j];
-        if (!ustensils.includes(ustensil)) {
-          ustensils.push(ustensil);
-        }
-      }
-    }
-  }
-  return ustensils;
-}
-
-// Crée un élément pour chaque item
 function createListElements(data, container) {
   for (let i = 0; i < data.length; i++) {
     const item = data[i];
-    const element = createElementWithClass('p', '');
+    const element = createElementWithClass('p', 'tag');
     element.textContent = item;
     container.appendChild(element);
   }
 }
 
-// Fermeture des dropdowns
 function closeDropdown(dropdown) {
-  const {icon, inputDivElement, customInput, chevron, listDiv} = dropdown;
+
+  const { icon, inputDivElement, customInput, chevron, listDiv } = dropdown;
   icon.style.display = 'none';
   inputDivElement.style.display = 'none';
   customInput.style.display = 'none';
@@ -76,17 +29,18 @@ function closeDropdown(dropdown) {
   isInputVisible = false;
 }
 
-// Affiche ou masquage la liste déroulante
 function toggleDropdown(input, icon, inputDivElement, customInput, chevron, listDiv) {
-  const dropdown = {input, icon, inputDivElement, customInput, chevron, listDiv};
+
+
+  const dropdown = { input, icon, inputDivElement, customInput, chevron, listDiv };
 
   input.addEventListener('click', () => {
-    if (isInputVisible && dropdown === currentOpenDropdown) {
+    if (isInputVisible && dropdown === currentOpenDropdown) { // Si l'input est visible et que le dropdown est le même que celui sur lequel on a cliqué
       closeDropdown(dropdown);
-      currentOpenDropdown = null;
+      currentOpenDropdown = null; // Réinitialise le dropdown actuel
     } else {
-      if (currentOpenDropdown) {
-        closeDropdown(currentOpenDropdown);
+      if (currentOpenDropdown) { // Si le dropdown est ouvert
+        closeDropdown(currentOpenDropdown); // Ferme le dropdown actuel
       }
       icon.style.display = 'block';
       inputDivElement.style.display = 'block';
@@ -94,13 +48,12 @@ function toggleDropdown(input, icon, inputDivElement, customInput, chevron, list
       inputDivElement.style.border = '1px solid lightgrey';
       chevron.classList.add('fa-solid--up');
       listDiv.style.display = 'block';
-      currentOpenDropdown = dropdown;
+      currentOpenDropdown = dropdown; // Définit le dropdown actuel comme celui sur lequel on a cliqué
       isInputVisible = true;
     }
   });
 }
 
-// Crée un bloc de dropdown
 function createDropdownBlock(type, data) {
   const block = createElementWithClass('div', `dropdown__block dropdown__block--${type}`);
   const inputWrapper = createElementWithClass('div', 'dropdown__input-wrapper');
@@ -138,35 +91,152 @@ function createDropdownBlock(type, data) {
   return block;
 }
 
-// Récupère les données et crée le bloc de dropdown
 function createBlock(type) {
-  let data;
-
+  let dataType;
   if (type === 'Ingredients') {
-    data = getIngredients();
+    dataType = 'ingredient';
   } else if (type === 'Appareils') {
-    data = getAppliances();
+    dataType = 'appliance';
   } else if (type === 'Ustensiles') {
-    data = getUstensils();
+    dataType = 'ustensil';
   }
-
+  const data = getItems(dataType);
   return createDropdownBlock(type, data);
 }
 
-// Fonction pour créer la section de menu déroulant
 export function createDropdownSection() {
   const dropdownSection = document.getElementById('dropdown');
-  // dropdownSection.id = 'dropdown';
-
   const ingredientsBlock = createBlock('Ingredients');
   const appareilsBlock = createBlock('Appareils');
-  const ustensilesBlock = createBlock('Ustensiles');
+  const ustensilsBlock = createBlock('Ustensiles');
 
   dropdownSection.appendChild(ingredientsBlock);
   dropdownSection.appendChild(appareilsBlock);
-  dropdownSection.appendChild(ustensilesBlock);
+  dropdownSection.appendChild(ustensilsBlock);
 
   const dropdownTitle = createElementWithClass('h2', 'dropdown__title');
   dropdownTitle.textContent = '1500 recettes';
   dropdownSection.appendChild(dropdownTitle);
+}
+
+/**
+ * Fonction exécutée lorsque le contenu de la page est chargé.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const ingredientsList = document.querySelector('.dropdown__ingredients-list');
+  const appliancesList = document.querySelector('.dropdown__appareils-list');
+  const utensilsList = document.querySelector('.dropdown__ustensiles-list');
+
+
+  const ingredientsInput = document.querySelector('.dropdown__ingredients-input');
+  const appliancesInput = document.querySelector('.dropdown__appareils-input');
+  const utensilsInput = document.querySelector('.dropdown__ustensiles-input');
+  const style = `
+    width: 203px;
+    height: 53px;
+    background-color: #FFD15B;
+    border-radius: 10px;
+    align-items: center;
+    padding: 17px 18px;
+    margin-top: 15px;
+    display: flex;
+    gap: 60px;
+    justify-content: space-between;
+    font-family: 'Manrope', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+  `;
+
+  /**
+   * Crée une nouvelle div pour le filtre.
+   *
+   * @param {string} ingredientName - Le nom de l'ingrédient.
+   * @param {HTMLElement} ingredientElement - L'élément HTML de l'ingrédient.
+   * @returns {HTMLDivElement} - La nouvelle div créée.
+   */
+  function createFilterTag(ingredientName, ingredientElement) {
+    const tagDiv = document.createElement('div');
+    tagDiv.textContent = ingredientName;
+    tagDiv.style.cssText = style;
+
+    const closeButton = document.createElement('span');
+    closeButton.textContent = 'X';
+    closeButton.style.cursor = 'pointer';
+
+    closeButton.addEventListener('click', () => {
+      tagDiv.remove();
+      ingredientElement.style.backgroundColor = "";
+      // searchAndRenderRecipes();
+    });
+
+    tagDiv.appendChild(closeButton);
+    return tagDiv;
+  }
+
+  /**
+   * Recherche et affiche les recettes.
+   * Crée et ajoute les éléments de la liste à la liste d'ingrédients
+   * @param {string} [query=''] - La requête de recherche.
+   */
+  function searchAndRenderRecipes(query = '') {
+    searchRecipes(query);
+    createListElements(getItems('ingredient'), ingredientsList);
+
+  }
+
+
+// Pour les ingredients
+  if (ingredientsList) {
+    const ingredientItems = ingredientsList.querySelectorAll('p');
+    addListItemsEventListeners(ingredientItems, 'ingredient', ingredientsList, createFilterTag);
+  }
+
+// Pour les appareils
+  if (appliancesList) {
+    const applianceItems = appliancesList.querySelectorAll('p');
+    addListItemsEventListeners(applianceItems, 'appliance', appliancesList, createFilterTag);
+  }
+
+// Pour les ustensiles
+  if (utensilsList) {
+    const utensilItems = utensilsList.querySelectorAll('p');
+    addListItemsEventListeners(utensilItems, 'utensil', utensilsList, createFilterTag);
+  }
+
+
+
+
+  ingredientsInput.addEventListener('input', (event) => {
+    const query = event.target.value;
+    searchAndRenderRecipes(query);
+  });
+
+  appliancesInput.addEventListener('input', (event) => {
+    const query = event.target.value;
+    searchAndRenderRecipes(query);
+  });
+
+  utensilsInput.addEventListener('input', (event) => {
+    const query = event.target.value;
+    searchAndRenderRecipes(query);
+  });
+});
+
+
+function addListItemsEventListeners(listItems, type, listContainer, createFilterTag) {
+  for (let i = 0; i < listItems.length; i++) {
+    const element = listItems[i];
+    element.style.cursor = 'pointer';
+
+    element.addEventListener('click', (e) => {
+      console.log(`Clicked on ${type}`);
+      const itemName = e.target.textContent;
+
+      e.target.style.backgroundColor = '#FFD15B';
+      const tagDiv = createFilterTag(itemName, e.target);
+      listContainer.insertAdjacentElement('afterend', tagDiv);
+    });
+  }
 }
