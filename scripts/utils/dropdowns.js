@@ -118,3 +118,123 @@ export function createDropdownSection() {
   dropdownTitle.textContent = '1500 recettes';
   dropdownSection.appendChild(dropdownTitle);
 }
+
+/**
+ * Fonction exécutée lorsque le contenu de la page est chargé.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const ingredientsList = document.querySelector('.dropdown__ingredients-list');
+  const appliancesList = document.querySelector('.dropdown__appareils-list');
+  const utensilsList = document.querySelector('.dropdown__ustensiles-list');
+
+
+  const ingredientsInput = document.querySelector('.dropdown__ingredients-input');
+  const appliancesInput = document.querySelector('.dropdown__appareils-input');
+  const utensilsInput = document.querySelector('.dropdown__ustensiles-input');
+  const style = `
+    width: 203px;
+    height: 53px;
+    background-color: #FFD15B;
+    border-radius: 10px;
+    align-items: center;
+    padding: 17px 18px;
+    margin-top: 15px;
+    display: flex;
+    gap: 60px;
+    justify-content: space-between;
+    font-family: 'Manrope', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+  `;
+
+  /**
+   * Crée une nouvelle div pour le filtre.
+   *
+   * @param {string} ingredientName - Le nom de l'ingrédient.
+   * @param {HTMLElement} ingredientElement - L'élément HTML de l'ingrédient.
+   * @returns {HTMLDivElement} - La nouvelle div créée.
+   */
+  function createFilterTag(ingredientName, ingredientElement) {
+    const tagDiv = document.createElement('div');
+    tagDiv.textContent = ingredientName;
+    tagDiv.style.cssText = style;
+
+
+
+    const closeButton = createCloseButton(tagDiv, ingredientElement);
+
+    tagDiv.appendChild(closeButton);
+    return tagDiv;
+  }
+
+  function createCloseButton(tagDiv, ingredientElement) {
+    const closeButton = document.createElement('span');
+    closeButton.textContent = 'X';
+    closeButton.style.cursor = 'pointer';
+
+    closeButton.addEventListener('click', () => {
+      tagDiv.remove();
+      ingredientElement.style.backgroundColor = "";
+    });
+
+    return closeButton;
+  }
+
+
+  function searchAndRenderRecipes(query = '') {
+    searchRecipes(query);
+    createListElements(getItems('ingredient'), ingredientsList);
+
+  }
+
+  ingredientsInput.addEventListener('input', (event) => {
+    attachInputListener(ingredientsInput, ingredientsList, 'ingredient');
+
+  });
+
+  appliancesInput.addEventListener('input', (event) => {
+    attachInputListener(appliancesInput, appliancesList, 'appliance');
+
+  });
+
+  utensilsInput.addEventListener('input', (event) => {
+    attachInputListener(utensilsInput, utensilsList, 'utensil');
+  });
+
+  function attachInputListener(input, list, type) {
+    input.addEventListener('input', (event) => {
+      const query = event.target.value;
+      searchAndRenderRecipes(query);
+      searchRecipes(query);
+      if (list) {
+        const items = list.querySelectorAll('p');
+        addListItemsEventListeners(items, type, list, createFilterTag);
+      }
+    });
+  }
+
+  function filterRecipesByTag(tagValue) {
+    console.log('recettes filtrées par tag:', tagValue);
+    searchAndRenderRecipes(tagValue);
+  }
+
+  function addListItemsEventListeners(listItems, type, listContainer, createFilterTag) {
+    for (let i = 0; i < listItems.length; i++) {
+      const element = listItems[i];
+      element.style.cursor = 'pointer';
+
+      element.addEventListener('click', (e) => {
+        console.log(`Clicked on ${type}`);
+        const itemName = e.target.textContent;
+
+        e.target.style.backgroundColor = '#FFD15B';
+        const tagDiv = createFilterTag(itemName, e.target);
+        listContainer.insertAdjacentElement('afterend', tagDiv);
+
+        filterRecipesByTag(itemName);
+      });
+    }
+  }
+});
