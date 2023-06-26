@@ -119,8 +119,8 @@ export function getItems(type) {
   return items;
 }
 
-export function searchRecipes(query) {
-  const matchingRecipes = findMatchingRecipes(query);
+export function searchRecipes(query, type) {
+  const matchingRecipes = findMatchingRecipes(query, type);
   displaySearchResults(matchingRecipes);
 
   const ingredientsList = document.querySelector('.dropdown__ingredients-list');
