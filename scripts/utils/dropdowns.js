@@ -1,7 +1,8 @@
-import {getItems, searchRecipes} from "./searchNativeLoops.js";
+import {getItems} from "./dataUtils.js";
 
 let currentOpenDropdown = null;
 let isInputVisible = false;
+
 
 function createElementWithClass(elementType, className) {
   const element = document.createElement(elementType);
@@ -9,7 +10,7 @@ function createElementWithClass(elementType, className) {
   return element;
 }
 
-function createListElements(data, container) {
+export function createListElements(data, container) {
   for (let i = 0; i < data.length; i++) {
     const item = data[i];
     const element = createElementWithClass('p', 'tag');
@@ -91,7 +92,7 @@ function createDropdownBlock(type, data) {
   return block;
 }
 
-function createBlock(type) {
+export function createBlock(type) {
   let dataType;
   if (type === 'Ingredients') {
     dataType = 'ingredient';
@@ -103,6 +104,7 @@ function createBlock(type) {
   const data = getItems(dataType);
   return createDropdownBlock(type, data);
 }
+
 
 export function createDropdownSection() {
   const dropdownSection = document.getElementById('dropdown');
@@ -117,126 +119,4 @@ export function createDropdownSection() {
   const dropdownTitle = createElementWithClass('h2', 'dropdown__title');
   dropdownTitle.textContent = '1500 recettes';
   dropdownSection.appendChild(dropdownTitle);
-}
-
-/**
- * Fonction exécutée lorsque le contenu de la page est chargé.
- */
-document.addEventListener('DOMContentLoaded', () => {
-  const ingredientsList = document.querySelector('.dropdown__ingredients-list');
-  const appliancesList = document.querySelector('.dropdown__appareils-list');
-  const utensilsList = document.querySelector('.dropdown__ustensiles-list');
-
-
-  const ingredientsInput = document.querySelector('.dropdown__ingredients-input');
-  const appliancesInput = document.querySelector('.dropdown__appareils-input');
-  const utensilsInput = document.querySelector('.dropdown__ustensiles-input');
-  const style = `
-    width: 203px;
-    height: 53px;
-    background-color: #FFD15B;
-    border-radius: 10px;
-    align-items: center;
-    padding: 17px 18px;
-    margin-top: 15px;
-    display: flex;
-    gap: 60px;
-    justify-content: space-between;
-    font-family: 'Manrope', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 19px;
-  `;
-
-  /**
-   * Crée une nouvelle div pour le filtre.
-   *
-   * @param {string} ingredientName - Le nom de l'ingrédient.
-   * @param {HTMLElement} ingredientElement - L'élément HTML de l'ingrédient.
-   * @returns {HTMLDivElement} - La nouvelle div créée.
-   */
-  function createFilterTag(ingredientName, ingredientElement) {
-    const tagDiv = document.createElement('div');
-    tagDiv.textContent = ingredientName;
-    tagDiv.style.cssText = style;
-
-    const closeButton = document.createElement('span');
-    closeButton.textContent = 'X';
-    closeButton.style.cursor = 'pointer';
-
-    closeButton.addEventListener('click', () => {
-      tagDiv.remove();
-      ingredientElement.style.backgroundColor = "";
-      // searchAndRenderRecipes();
-    });
-
-    tagDiv.appendChild(closeButton);
-    return tagDiv;
-  }
-
-  /**
-   * Recherche et affiche les recettes.
-   * Crée et ajoute les éléments de la liste à la liste d'ingrédients
-   * @param {string} [query=''] - La requête de recherche.
-   */
-  function searchAndRenderRecipes(query = '') {
-    searchRecipes(query);
-    createListElements(getItems('ingredient'), ingredientsList);
-
-  }
-
-
-// Pour les ingredients
-  if (ingredientsList) {
-    const ingredientItems = ingredientsList.querySelectorAll('p');
-    addListItemsEventListeners(ingredientItems, 'ingredient', ingredientsList, createFilterTag);
-  }
-
-// Pour les appareils
-  if (appliancesList) {
-    const applianceItems = appliancesList.querySelectorAll('p');
-    addListItemsEventListeners(applianceItems, 'appliance', appliancesList, createFilterTag);
-  }
-
-// Pour les ustensiles
-  if (utensilsList) {
-    const utensilItems = utensilsList.querySelectorAll('p');
-    addListItemsEventListeners(utensilItems, 'utensil', utensilsList, createFilterTag);
-  }
-
-
-
-
-  ingredientsInput.addEventListener('input', (event) => {
-    const query = event.target.value;
-    searchAndRenderRecipes(query);
-  });
-
-  appliancesInput.addEventListener('input', (event) => {
-    const query = event.target.value;
-    searchAndRenderRecipes(query);
-  });
-
-  utensilsInput.addEventListener('input', (event) => {
-    const query = event.target.value;
-    searchAndRenderRecipes(query);
-  });
-});
-
-
-function addListItemsEventListeners(listItems, type, listContainer, createFilterTag) {
-  for (let i = 0; i < listItems.length; i++) {
-    const element = listItems[i];
-    element.style.cursor = 'pointer';
-
-    element.addEventListener('click', (e) => {
-      console.log(`Clicked on ${type}`);
-      const itemName = e.target.textContent;
-
-      e.target.style.backgroundColor = '#FFD15B';
-      const tagDiv = createFilterTag(itemName, e.target);
-      listContainer.insertAdjacentElement('afterend', tagDiv);
-    });
-  }
 }
