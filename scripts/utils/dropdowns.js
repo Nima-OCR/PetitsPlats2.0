@@ -1,5 +1,5 @@
-import {getItems} from "./searchNativeLoops.js";
-// let currentTags = [];
+import {getItems} from "./dataUtils.js";
+
 let currentOpenDropdown = null;
 let isInputVisible = false;
 
@@ -92,7 +92,7 @@ function createDropdownBlock(type, data) {
   return block;
 }
 
-export function createBlock(type, query = '') {
+export function createBlock(type) {
   let dataType;
   if (type === 'Ingredients') {
     dataType = 'ingredient';
@@ -101,7 +101,7 @@ export function createBlock(type, query = '') {
   } else if (type === 'Ustensiles') {
     dataType = 'ustensil';
   }
-  const data = getItems(dataType, query);
+  const data = getItems(dataType);
   return createDropdownBlock(type, data);
 }
 
@@ -120,4 +120,3 @@ export function createDropdownSection() {
   dropdownTitle.textContent = '1500 recettes';
   dropdownSection.appendChild(dropdownTitle);
 }
-
