@@ -2,16 +2,13 @@ import {displaySearchResults} from "./displayUtils.js";
 import {previousRecipes} from "./searchNativeLoops.js";
 
 /**
- * Crée un tag sélectionné et l'ajoute au DOM.
+ * Crée un élément de tag filtrant pour les recettes.
  *
- * @param {string} itemName - Le nom de l'élément du tag.
- * @param {HTMLElement} itemContainer - Le conteneur de l'élément du tag.
- * @param {HTMLElement} targetContainer - Le conteneur cible où le tag sélectionné sera inséré.
- * @returns {HTMLElement} - L'élément du tag créé.
+ * @param {string} itemName - Le nom de l'élément de tag.
+ * @param {HTMLElement} itemContainer - Le conteneur de l'élément de tag.
+ * @param {HTMLElement} targetContainer - Le conteneur cible pour afficher les tags sélectionnés.
+ * @returns {HTMLElement} - L'élément de tag créé.
  */
-
-
-
 export function createFilterTag(itemName, itemContainer, targetContainer) {
   const selectedItemsSet = new Set();
   const itemElement = document.createElement("p");
@@ -26,7 +23,7 @@ export function createFilterTag(itemName, itemContainer, targetContainer) {
 
     if (!selectedTags.includes(clickedText)) {
       selectedTags.push(clickedText);
-      console.log("Tags actuellement sélectionnés : ", selectedTags);
+      console.log("(createFilterTag) Tags actuellement sélectionnés : ", selectedTags);
     }
 
     // Filtrer les recettes en fonction des tags sélectionnés
@@ -81,7 +78,7 @@ export function createFilterTag(itemName, itemContainer, targetContainer) {
       }
     }
 
-    console.log("Recettes actuellement affichées : ", displayedRecipes);
+    console.log("(createFilterTag) Recettes actuellement affichées : ", displayedRecipes);
 
     displaySearchResults(displayedRecipes);
 
@@ -125,7 +122,7 @@ export function createFilterTag(itemName, itemContainer, targetContainer) {
     closeButton.style.cursor = "pointer";
 
     closeButton.addEventListener("click", () => {
-      console.log("Tag supprimé :", itemName);
+      console.log("(createFilterTag) Tag supprimé :", itemName);
 
       selectedItemDiv.remove();
       itemElement.style.backgroundColor = "";
@@ -133,7 +130,7 @@ export function createFilterTag(itemName, itemContainer, targetContainer) {
       selectedItemsSet.delete(itemName);
 
       // Affiche les recettes précédentes
-      console.log("Recettes précédentes : ", previousRecipes);
+      console.log("(createFilterTag) Recettes précédentes : ", previousRecipes);
       displaySearchResults(previousRecipes);
 
     });

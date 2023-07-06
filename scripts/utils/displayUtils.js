@@ -2,12 +2,13 @@ import {getItemsByType} from "./dataUtils.js";
 
 
 /**
- * Affiche les éléments filtrés dans le DOM.
+ * Affiche les éléments filtrés dans un conteneur donné.
  *
- * @param {Object[]} recipeList - La liste des recettes.
- * @param {string} advancedSearchFiltersByType - Le type de filtre de recherche avancée (ingredient, appliance, ustensils).
- * @param {HTMLElement} container - Le conteneur HTML dans lequel afficher les éléments filtrés.
+ * @param {Array} recipeList - La liste des recettes.
+ * @param {string} advancedSearchFiltersByType - Le type de filtre de recherche avancée (ingredient, appliance, ustensil).
+ * @param {HTMLElement} container - Le conteneur HTML où afficher les éléments filtrés.
  * @param {string} query - La requête de recherche.
+ * @returns {void}
  */
 export function displayFilteredItems(recipeList, advancedSearchFiltersByType, container, query) {
   container.innerHTML = "";
@@ -29,13 +30,15 @@ export function displayFilteredItems(recipeList, advancedSearchFiltersByType, co
       container.appendChild(itemElement);
     }
   }
+  console.log(`(displayFilteredItems) Affichage des éléments filtrés pour la requête '${query}':`, displayItems);
 }
 
 
 /**
- * Affiche les résultats de recherche dans le DOM en masquant ou affichant les recettes correspondantes.
+ * Affiche les résultats de recherche des recettes.
  *
- * @param {Object[]} displayedRecipes - Les recettes à afficher.
+ * @param {Array} displayedRecipes - Les recettes à afficher.
+ * @returns {void}
  */
 export function displaySearchResults(displayedRecipes) {
   const recipeArticles = document.querySelectorAll(".recipe-article");

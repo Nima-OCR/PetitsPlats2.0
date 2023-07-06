@@ -7,8 +7,7 @@ import {appliancesData, ingredientsData, ustensilsData} from "./dataUtils.js";
  * Effectue une recherche de recettes et affiche les résultats correspondants.
  *
  * @param {string} query - La requête de recherche.
- * @param {string} type - Le type de recherche (ingredient, ustensil, appliance).
- * @returns {void}
+ * @returns {Array} - Les recettes correspondantes à la requête de recherche.
  */
 export let previousRecipes = []; // Déclarer une variable pour stocker les recettes correspondantes précédentes
 
@@ -42,7 +41,7 @@ export function searchRecipes(query) {
       }
       matchingRecipes = findMatchingRecipes(query);
       displaySearchResults(matchingRecipes);
-      console.log("Recettes correspondantes : ", matchingRecipes);
+      // console.log("Recettes correspondantes : ", matchingRecipes);
 
       displayFilteredItems(recipes, "ingredient", ingredientsList, query);
       displayFilteredItems(recipes, "appliance", appliancesList, query);
@@ -53,7 +52,7 @@ export function searchRecipes(query) {
 
   matchingRecipes = findMatchingRecipes(query);
   displaySearchResults(matchingRecipes);
-  console.log("Recettes correspondantes : ", matchingRecipes);
+  // console.log("Recettes correspondantes : ", matchingRecipes);
 
 
   displayFilteredItems(matchingRecipes, "ingredient", ingredientsList, query);
@@ -61,7 +60,7 @@ export function searchRecipes(query) {
   displayFilteredItems(matchingRecipes, "ustensils", ustensilsList, query);
 
   previousRecipes = [...matchingRecipes]; // Mettre à jour les recettes correspondantes précédentes
-  console.log("Recettes correspondantes précédentes: ", previousRecipes);
+  console.log("(searchRecipes) Recettes correspondantes précédentes: ", previousRecipes);
   return matchingRecipes;
 }
 

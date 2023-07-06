@@ -1,11 +1,11 @@
 import {recipes} from "../../data/recipes.js";
 
 /**
- * Obtient les éléments d'une liste de recettes en fonction du type spécifié.
- *
- * @param {Object[]} recipeList - La liste des recettes.
- * @param {string} advancedSearchFiltersByType - Le type de filtre de recherche avancée (ingredient, appliance, ustensils).
- * @returns {string[]} - Les éléments filtrés par type.
+ * Récupère les éléments de type spécifié à partir de la liste de recettes.
+ * Cette fonction est utilisée pour filtrer les éléments affichés dans la liste déroulante.
+ * @param {Array} recipeList - La liste de recettes.
+ * @param {string} advancedSearchFiltersByType - Le type de filtre de recherche avancée.
+ * @returns {Array} - Les éléments correspondants au type spécifié.
  */
 export let ingredientsData = [];
 export let appliancesData = [];
@@ -45,7 +45,7 @@ export function getItemsByType(recipeList, advancedSearchFiltersByType) {
     }
   }
 
-  console.log(`${elementType} ajoutés :`, [...filteredItemsByType].join(", "));
+  console.log(`(getItemsByType) ${elementType} ajoutés :`, [...filteredItemsByType].join(", "));
 
   return [...filteredItemsByType];
 }
@@ -53,10 +53,11 @@ export function getItemsByType(recipeList, advancedSearchFiltersByType) {
 
 
 /**
- * Obtient les éléments par type à partir des recettes.
+ * Récupère tous les éléments (ingredient, ustensil ou appliance) à partir
+ * de la liste de recettes indépendamment du contexte de filtrage.
  *
- * @param {string} type - Le type d'éléments à récupérer (ingredient, ustensil, appliance).
- * @returns {string[]} Les éléments correspondants au type spécifié.
+ * @param {string} type - Le type d'élément (ingredient, ustensil, appliance).
+ * @returns {Array} - Les éléments du type spécifié.
  */
 export function getItems(type) {
   const items = [];
@@ -86,5 +87,6 @@ export function getItems(type) {
 
   items.sort((a, b) => a.localeCompare(b, "fr"));
 
+  console.log(`(getItems) Liste des '${type}':`, items);
   return items;
 }

@@ -25,7 +25,6 @@ export function textIncludes(item, query) {
  * Si aucune correspondance n'est trouvée, un tableau vide est retourné.
  */
 
-
 let storedMatchingRecipes = []; // Stocke les recettes correspondantes
 
 export function findMatchingRecipes(query) {
@@ -36,6 +35,7 @@ export function findMatchingRecipes(query) {
     const ingredients = recipe.ingredients;
     const appliance = recipe.appliance.toLowerCase();
     let ustensils = [];
+
     for (const utensil of recipe.ustensils) {
       ustensils.push(utensil.toLowerCase());
     }
@@ -66,14 +66,11 @@ export function findMatchingRecipes(query) {
     }
   }
 
-  storedMatchingRecipes = matchingRecipes; // Mettre à jour les recettes correspondantes
+  storedMatchingRecipes = matchingRecipes;
 
-  // return matchingRecipes;
-  console.log("Voici les recettes correspondantes :", storedMatchingRecipes);
+  console.log("(findMatchingRecipes) Les recettes correspondantes :", storedMatchingRecipes);
 
   return storedMatchingRecipes;
-
-
 }
 
 
@@ -108,6 +105,8 @@ export function addSearchEventListener(inputSelector, data, listSelector, update
 
     const matchingItems = [...matchingSet].sort((a, b) => a.localeCompare(b, "fr"));
 
+    console.log(`(addSearchEventListener) Résultats correspondants à la recherche '${query}':`, matchingItems);
+
     updateListFunc(matchingItems, listSelector, query);
 
   });
@@ -134,6 +133,7 @@ export function updateList(filteredItems, listSelector, query, inputSelector) {
     }
   }
 
+  console.log(`(updateList) Résultats filtrés pour la requête '${query}':`, matchingItems);
 
   if (matchingItems.length > 0) {
     const itemsContainer = document.querySelector(listSelector);
@@ -143,6 +143,4 @@ export function updateList(filteredItems, listSelector, query, inputSelector) {
       listContainer.appendChild(itemElement);
     }
   }
-
-  // Utilisez la variable copiedMatchingItems selon vos besoins
 }
