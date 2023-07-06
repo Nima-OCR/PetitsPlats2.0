@@ -1,92 +1,68 @@
 import {recipes} from "../../data/recipes.js";
 
-/**
- * Récupère les éléments de type spécifié à partir de la liste de recettes.
- * Cette fonction est utilisée pour filtrer les éléments affichés dans la liste déroulante.
- * @param {Array} recipeList - La liste de recettes.
- * @param {string} advancedSearchFiltersByType - Le type de filtre de recherche avancée.
- * @returns {Array} - Les éléments correspondants au type spécifié.
- */
 export let ingredientsData = [];
 export let appliancesData = [];
 export let ustensilsData = [];
 
 export function getItemsByType(recipeList, advancedSearchFiltersByType) {
-  const filteredItemsByType = new Set();
+  let filteredItemsByType = new Set();
   let elementType = "";
 
-  if (advancedSearchFiltersByType === "appliance") {
-    elementType = "Appareils";
-  } else if (advancedSearchFiltersByType === "ingredient") {
-    elementType = "Ingrédients";
-  } else if (advancedSearchFiltersByType === "ustensils") {
-    elementType = "Ustensiles";
-  }
-
-  for (const recipe of recipeList) {
+  recipeList.forEach(recipe => {
     if (advancedSearchFiltersByType === "appliance") {
-      const appliance = recipe.appliance;
-      filteredItemsByType.add(appliance);
-      appliancesData.push(appliance);
+      filteredItemsByType.add(recipe.appliance);
+      appliancesData.push(recipe.appliance);
+      elementType = "Appareils";
     } else if (advancedSearchFiltersByType === "ingredient") {
-      for (const ingredientObj of recipe.ingredients) {
+      recipe.ingredients.forEach(ingredientObj => {
         const ingredient = ingredientObj.ingredient.toLowerCase();
-        if (ingredient) {
-          filteredItemsByType.add(ingredient);
-          ingredientsData.push(ingredient);
-        }
-      }
+        filteredItemsByType.add(ingredient);
+        ingredientsData.push(ingredient);
+      });
+      elementType = "Ingrédients";
     } else if (advancedSearchFiltersByType === "ustensils") {
-      for (const utensil of recipe.ustensils) {
+      recipe.ustensils.forEach(utensil => {
         const lowercaseUtensil = utensil.toLowerCase();
         filteredItemsByType.add(lowercaseUtensil);
         ustensilsData.push(lowercaseUtensil);
-      }
+      });
+      elementType = "Ustensiles";
     }
-  }
+  });
 
-  console.log(`(getItemsByType) ${elementType} ajoutés :`, [...filteredItemsByType].join(", "));
+  console.log(`(getItemsByType) ${elementType} ajoutés :`, Array.from(filteredItemsByType).join(", "));
 
-  return [...filteredItemsByType];
+  return Array.from(filteredItemsByType);
 }
 
-
-
-/**
- * Récupère tous les éléments (ingredient, ustensil ou appliance) à partir
- * de la liste de recettes indépendamment du contexte de filtrage.
- *
- * @param {string} type - Le type d'élément (ingredient, ustensil, appliance).
- * @returns {Array} - Les éléments du type spécifié.
- */
 export function getItems(type) {
-  const items = [];
+  let items = [];
 
-  for (const recipe of recipes) {
+  recipes.forEach(recipe => {
     if (type === "ingredient") {
-      for (const ingredientObj of recipe.ingredients) {
+      recipe.ingredients.forEach(ingredientObj => {
         const ingredient = ingredientObj.ingredient;
         if (!items.includes(ingredient)) {
           items.push(ingredient);
         }
-      }
+      });
     } else if (type === "ustensil") {
-      for (const ustensil of recipe.ustensils) {
-        const lowercaseUstensil = ustensil.toLowerCase();
+      recipe.ustensils.forEach(utensil => {
+        const lowercaseUstensil = utensil.toLowerCase();
         if (!items.includes(lowercaseUstensil)) {
           items.push(lowercaseUstensil);
         }
-      }
+      });
     } else if (type === "appliance") {
-      const appliance = recipe.appliance;
-      if (!items.includes(appliance)) {
-        items.push(appliance);
+      if (!items.includes(recipe.appliance)) {
+        items.push(recipe.appliance);
       }
     }
-  }
+  });
 
   items.sort((a, b) => a.localeCompare(b, "fr"));
 
   console.log(`(getItems) Liste des '${type}':`, items);
+
   return items;
 }

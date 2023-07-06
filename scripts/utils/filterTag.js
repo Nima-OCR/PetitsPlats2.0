@@ -1,14 +1,6 @@
-import {displaySearchResults} from "./displayUtils.js";
-import {previousRecipes} from "./searchNativeLoops.js";
+import { displaySearchResults } from "./displayUtils.js";
+import { previousRecipes } from "./searchNativeLoops.js";
 
-/**
- * Crée un élément de tag filtrant pour les recettes.
- *
- * @param {string} itemName - Le nom de l'élément de tag.
- * @param {HTMLElement} itemContainer - Le conteneur de l'élément de tag.
- * @param {HTMLElement} targetContainer - Le conteneur cible pour afficher les tags sélectionnés.
- * @returns {HTMLElement} - L'élément de tag créé.
- */
 export function createFilterTag(itemName, itemContainer, targetContainer) {
   const selectedItemsSet = new Set();
   const itemElement = document.createElement("p");
@@ -26,57 +18,35 @@ export function createFilterTag(itemName, itemContainer, targetContainer) {
       console.log("(createFilterTag) Tags actuellement sélectionnés : ", selectedTags);
     }
 
-    // Filtrer les recettes en fonction des tags sélectionnés
-    const displayedRecipes = [];
-    for (const recipe of previousRecipes) {
+    const displayedRecipes = previousRecipes.filter(recipe => {
       const lowerCaseTags = selectedTags.map(tag => tag.toLowerCase());
       let isMatching = false;
 
-      // Vérifier si au moins un ingrédient correspond à un tag
-      for (const ingredientObj of recipe.ingredients) {
+      recipe.ingredients.forEach(ingredientObj => {
         const ingredient = ingredientObj.ingredient.toLowerCase();
-        for (const tag of lowerCaseTags) {
-          if (ingredient.includes(tag)) {
-            isMatching = true;
-            break;
-          }
-        }
-        if (isMatching) {
-          break;
-        }
-      }
-
-      // Vérifier si l'appareil correspond à un tag
-      if (!isMatching) {
-        if (lowerCaseTags.includes(recipe.appliance.toLowerCase())) {
+        if (lowerCaseTags.some(tag => ingredient.includes(tag))) {
           isMatching = true;
         }
+      });
+
+      if (!isMatching && lowerCaseTags.includes(recipe.appliance.toLowerCase())) {
+        isMatching = true;
       }
 
-      // Vérifier si au moins un ustensile correspond à un tag
-      for (const utensil of recipe.ustensils) {
-        if (lowerCaseTags.includes(utensil.toLowerCase())) {
-          isMatching = true;
-          break;
-        }
+      if (!isMatching && recipe.ustensils.some(utensil => lowerCaseTags.includes(utensil.toLowerCase()))) {
+        isMatching = true;
       }
 
-      // Vérifier si le nom ou la description correspond à un tag
       if (!isMatching) {
         const name = recipe.name.toLowerCase();
         const description = recipe.description.toLowerCase();
-        for (const tag of lowerCaseTags) {
-          if (name.includes(tag) || description.includes(tag)) {
-            isMatching = true;
-            break;
-          }
+        if (lowerCaseTags.some(tag => name.includes(tag) || description.includes(tag))) {
+          isMatching = true;
         }
       }
 
-      if (isMatching) {
-        displayedRecipes.push(recipe);
-      }
-    }
+      return isMatching;
+    });
 
     console.log("(createFilterTag) Recettes actuellement affichées : ", displayedRecipes);
 
@@ -129,10 +99,8 @@ export function createFilterTag(itemName, itemContainer, targetContainer) {
       itemElement.classList.remove("selected");
       selectedItemsSet.delete(itemName);
 
-      // Affiche les recettes précédentes
       console.log("(createFilterTag) Recettes précédentes : ", previousRecipes);
       displaySearchResults(previousRecipes);
-
     });
 
     selectedItemDiv.appendChild(itemText);
