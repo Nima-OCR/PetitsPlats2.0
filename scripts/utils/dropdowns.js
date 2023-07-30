@@ -1,4 +1,6 @@
-import {getItems} from "./dataUtils.js";
+
+import {recipes} from "../../data/recipes.js";
+import {getItemsByType} from "./dataExtraction.js";
 
 let currentOpenDropdown = null;
 let isInputVisible = false;
@@ -95,13 +97,13 @@ function createDropdownBlock(type, data) {
 export function createBlock(type) {
   let dataType;
   if (type === 'Ingredients') {
-    dataType = 'ingredient';
+    dataType = 'ingredients';
   } else if (type === 'Appareils') {
-    dataType = 'appliance';
+    dataType = 'appliances';
   } else if (type === 'Ustensiles') {
-    dataType = 'ustensil';
+    dataType = 'utensils';
   }
-  const data = getItems(dataType);
+  const data = getItemsByType(recipes, dataType);
   return createDropdownBlock(type, data);
 }
 
